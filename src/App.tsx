@@ -86,16 +86,16 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = "max-w-2xl" }: any
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: EASE_OUT_QUART }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/60 backdrop-blur-xl z-50"
+          className="fixed inset-0 bg-black/90 md:bg-black/60 backdrop-blur-xl z-50"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.4, ease: EASE_OUT_QUART }}
-          className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full ${maxWidth} max-h-[85vh] overflow-y-auto bg-[#0a0a0a]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-8 z-50 shadow-[0_0_50px_rgba(0,0,0,0.8)] hide-scrollbar`}
+          className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full ${maxWidth} max-h-[85vh] overflow-y-auto bg-[#0a0a0a] md:bg-[#0a0a0a]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-8 z-50 shadow-[0_0_50px_rgba(0,0,0,0.8)] hide-scrollbar`}
         >
-          <div className="flex justify-between items-center mb-6 sticky top-0 z-20 bg-[#0a0a0a]/80 backdrop-blur-md py-4 -mt-4 -mx-4 px-4 rounded-t-3xl border-b border-white/5">
+          <div className="flex justify-between items-center mb-6 sticky top-0 z-20 bg-[#0a0a0a] md:bg-[#0a0a0a]/80 backdrop-blur-md py-4 -mt-4 -mx-4 px-4 rounded-t-3xl border-b border-white/5">
             <h2 className="text-3xl font-black">{title}</h2>
             <button onClick={onClose} className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors">
               <X className="w-6 h-6" />
