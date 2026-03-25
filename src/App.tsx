@@ -32,7 +32,7 @@ const portfolioData = {
     Backend: ['Node.js', 'Python', 'FastAPI'],
     Databases: ['PostgreSQL', 'SQLite', 'Convex', 'Prisma'],
     Cloud: ['AWS', 'Microsoft Azure', 'Docker', 'Vercel'],
-    AI: ['LLMs & APIs', 'Unsloth', 'Local AI', 'AI Agents'],
+    AI: ['LLMs & APIs', 'Local AI', 'AI Agents'],
     Tools: ['Git', 'Streamlit', 'Playwright', 'FL Studio']
   },
   aiWorkflow: {
@@ -61,14 +61,14 @@ const portfolioData = {
     music: {
       details: "Composed, mixed, and mastered original digital tracks using FL Studio. Released on Spotify.",
       tracks: [
-        { name: "Breathless Echo", image: "https://i.scdn.co/image/ab67616d0000b27340cbf7b63a507ca241d02b36" },
-        { name: "Gentle Breeze", image: "https://i.scdn.co/image/ab67616d0000b2738a5189a08e4b16bd4c9f394f" },
-        { name: "Mellow & Missing", image: "https://i.scdn.co/image/ab67616d0000b273f64db69926aaa3f96ddea62e" },
-        { name: "Fragile Bonds", image: "https://i.scdn.co/image/ab67616d0000b273d1a046a7da4d41415c57b882" }
+        { name: "Breathless Echo", image: "https://i.scdn.co/image/ab67616d0000b27340cbf7b63a507ca241d02b36", url: "https://open.spotify.com/track/63012IrFr5rKMHV6dJ2bCX?si=b2b9c7785cb34beb" },
+        { name: "Gentle Breeze", image: "https://i.scdn.co/image/ab67616d0000b2738a5189a08e4b16bd4c9f394f", url: "https://open.spotify.com/track/0Wa0BRwd4ZStbAtC4h9bri?si=75264628feea4947" },
+        { name: "Mellow & Missing", image: "https://i.scdn.co/image/ab67616d0000b273f64db69926aaa3f96ddea62e", url: "https://open.spotify.com/track/0R607x86AVNGilugaAfgaf?si=d4356c1bd24641ba" },
+        { name: "Fragile Bonds", image: "https://i.scdn.co/image/ab67616d0000b273d1a046a7da4d41415c57b882", url: "https://open.spotify.com/track/5cy6XCvzSuHfH3kLi7WhRd?si=919b5fe840d54a7c" }
       ]
     },
     reading: {
-      details: "I like reading and watching it.",
+      details: "Diving into captivating stories and beautiful art through anime, manga, and manhwa.",
     }
   }
 };
@@ -473,24 +473,111 @@ export default function App() {
         </div>
       </Modal>
 
-      <Modal isOpen={activeModal === 'stack'} onClose={() => setActiveModal(null)} title="Tech Stack" maxWidth="max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Object.entries(portfolioData.skills).map(([category, skills]) => (
-            <div key={category} className="group relative rounded-lg border border-white/10 bg-white/[0.02] p-6 hover:bg-white/[0.04] transition-colors overflow-hidden">
-               <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.01] blur-2xl rounded-full translate-x-12 -translate-y-12"></div>
-               <div className="mb-6 border-b border-white/5 pb-4">
-                  <h4 className="text-base font-bold tracking-tight text-white/90 uppercase">{category}</h4>
-               </div>
-               <ul className="flex flex-col gap-3">
-                 {skills.map((skill, i) => (
-                   <li key={skill} className="flex items-center gap-3 text-white/70">
-                     <span className="w-1.5 h-1.5 bg-white/20 rounded-sm"></span>
-                     <span className="text-sm font-medium tracking-tight">{skill}</span>
-                   </li>
-                 ))}
-               </ul>
+      <Modal isOpen={activeModal === 'stack'} onClose={() => setActiveModal(null)} title="Tech Stack" maxWidth="max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          {/* Engineering Core (Frontend & Backend) */}
+          <div className="md:col-span-2 bg-[#0a0a0a]/50 border border-white/5 p-6 md:p-8 rounded-3xl flex flex-col justify-between group hover:border-white/10 transition-colors">
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-2">
+                <Code className="w-5 h-5 text-white/40" />
+                <h3 className="text-xl font-bold tracking-tight text-white/90">Engineering core</h3>
+              </div>
+              <p className="text-sm text-white/40 leading-relaxed max-w-md">Full-stack foundation with a focus on performant, scalable, and responsive architectures.</p>
             </div>
-          ))}
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-auto border-t border-white/5 pt-6">
+              <div>
+                <h4 className="text-[10px] font-black tracking-widest text-white/30 uppercase mb-4">Frontend</h4>
+                <div className="flex flex-wrap gap-2">
+                  {portfolioData.skills.Frontend.map(s => <span key={s} className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-lg text-xs font-medium text-white/70">{s}</span>)}
+                </div>
+              </div>
+              <div>
+                <h4 className="text-[10px] font-black tracking-widest text-white/30 uppercase mb-4">Backend</h4>
+                <div className="flex flex-wrap gap-2">
+                  {portfolioData.skills.Backend.map(s => <span key={s} className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-lg text-xs font-medium text-white/70">{s}</span>)}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Intelligence (AI) */}
+          <div className="md:col-span-1 bg-gradient-to-b from-indigo-500/10 to-[#0a0a0a]/50 border border-indigo-500/20 p-6 md:p-8 rounded-3xl flex flex-col justify-between group hover:border-indigo-500/30 transition-colors relative overflow-hidden">
+            <div className="absolute right-0 top-0 w-32 h-32 bg-indigo-500/10 blur-3xl rounded-full"></div>
+            <div className="mb-10 relative z-10">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="relative w-6 h-6 flex items-center justify-center shrink-0">
+                  <div className="absolute inset-0 bg-indigo-500/20 blur-md rounded-full shadow-[0_0_15px_rgba(99,102,241,0.5)]"></div>
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 text-indigo-400 relative z-10 drop-shadow-[0_0_8px_rgba(99,102,241,0.8)]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
+                    <line x1="12" y1="22" x2="12" y2="15.5" />
+                    <polyline points="22 8.5 12 15.5 2 8.5" />
+                    <polyline points="2 15.5 12 8.5 22 15.5" />
+                    <line x1="12" y1="2" x2="12" y2="8.5" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold tracking-tight text-indigo-100">Intelligence</h3>
+              </div>
+              <p className="text-sm text-indigo-200/50 leading-relaxed">Agentic frameworks, local models, and integration.</p>
+            </div>
+            
+            <div className="mt-auto relative z-10 border-t border-indigo-500/10 pt-6">
+              <h4 className="text-[10px] font-black tracking-widest text-indigo-400/50 uppercase mb-4">AI & ML</h4>
+              <div className="flex flex-wrap gap-2">
+                {portfolioData.skills.AI.map(s => <span key={s} className="px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/10 rounded-lg text-xs font-medium text-indigo-200">{s}</span>)}
+              </div>
+            </div>
+          </div>
+
+          {/* Infrastructure */}
+          <div className="md:col-span-1 bg-[#0a0a0a]/50 border border-white/5 p-6 md:p-8 rounded-3xl flex flex-col justify-between group hover:border-white/10 transition-colors">
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-2">
+                <Cloud className="w-5 h-5 text-white/40" />
+                <h3 className="text-xl font-bold tracking-tight text-white/90">Infrastructure</h3>
+              </div>
+            </div>
+            
+            <div className="mt-auto border-t border-white/5 pt-6">
+              <div className="flex flex-wrap gap-2">
+                {portfolioData.skills.Cloud.map(s => <span key={s} className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-lg text-xs font-medium text-white/70">{s}</span>)}
+              </div>
+            </div>
+          </div>
+
+          {/* Data Architecture */}
+          <div className="md:col-span-1 bg-[#0a0a0a]/50 border border-white/5 p-6 md:p-8 rounded-3xl flex flex-col justify-between group hover:border-white/10 transition-colors">
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-2">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                <h3 className="text-xl font-bold tracking-tight text-white/90">Data Architecture</h3>
+              </div>
+            </div>
+            
+            <div className="mt-auto border-t border-white/5 pt-6">
+              <div className="flex flex-wrap gap-2">
+                {portfolioData.skills.Databases.map(s => <span key={s} className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-lg text-xs font-medium text-white/70">{s}</span>)}
+              </div>
+            </div>
+          </div>
+
+          {/* Tooling */}
+          <div className="md:col-span-1 bg-[#0a0a0a]/50 border border-white/5 p-6 md:p-8 rounded-3xl flex flex-col justify-between group hover:border-white/10 transition-colors">
+            <div className="mb-10">
+              <div className="flex items-center gap-3 mb-2">
+                <Wrench className="w-5 h-5 text-white/40" />
+                <h3 className="text-xl font-bold tracking-tight text-white/90">Tooling</h3>
+              </div>
+            </div>
+            
+            <div className="mt-auto border-t border-white/5 pt-6">
+              <div className="flex flex-wrap gap-2">
+                {portfolioData.skills.Tools.map(s => <span key={s} className="px-3 py-1.5 bg-white/5 border border-white/5 rounded-lg text-xs font-medium text-white/70">{s}</span>)}
+              </div>
+            </div>
+          </div>
+          
         </div>
       </Modal>
 
@@ -498,15 +585,6 @@ export default function App() {
         <div className="space-y-8">
           <div className="flex items-start justify-between border-b border-white/10 pb-6 group pt-2">
             <div className="flex items-center gap-5 sm:gap-6">
-              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-amber-500/20 flex items-center justify-center shrink-0 overflow-hidden shadow-[0_0_30px_rgba(251,191,36,0.15)] group-hover:shadow-[0_0_40px_rgba(251,191,36,0.25)] transition-shadow duration-500">
-                 <div className="absolute inset-0 bg-amber-400/10 blur-xl rounded-full group-hover:bg-amber-400/20 transition-colors"></div>
-                 <svg viewBox="0 0 100 100" className="w-10 h-10 sm:w-12 sm:h-12 text-amber-400 relative z-10" fill="none" stroke="currentColor" strokeWidth="3">
-                   <circle cx="50" cy="50" r="40" strokeOpacity="0.2" className="animate-[spin_10s_linear_infinite]" strokeDasharray="10 10" />
-                   <polygon points="50 15, 85 80, 15 80" className="animate-[spin_8s_linear_infinite_reverse]" strokeOpacity="0.4" />
-                   <path d="M50 30 L70 65 L30 65 Z" strokeWidth="4" />
-                   <circle cx="50" cy="50" r="4" fill="currentColor" stroke="none" />
-                 </svg>
-              </div>
               <div className="flex flex-col justify-center">
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight flex items-center gap-3">
                   {portfolioData.company.full}
@@ -711,7 +789,7 @@ export default function App() {
               {portfolioData.hobbies.music.tracks.map((track, i) => (
                 <a 
                   key={track.name} 
-                  href={`https://open.spotify.com/search/${encodeURIComponent(track.name)}`}
+                  href={track.url}
                   target="_blank"
                   rel="noreferrer"
                   className="group relative overflow-hidden rounded-xl bg-white/5 aspect-square border border-white/5 block cursor-pointer hover:border-white/20 hover:shadow-lg transition-all"
