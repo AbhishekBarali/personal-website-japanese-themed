@@ -176,14 +176,23 @@ function DraggableBox({
   className: string;
   variants: any;
 }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <motion.div
       variants={variants}
-      drag
+      drag={!isMobile}
       dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
       dragElastic={0.8}
       dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
-      whileDrag={{ scale: 1.05, zIndex: 100, boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }}
+      whileDrag={!isMobile ? { scale: 1.05, zIndex: 100, boxShadow: '0 20px 60px rgba(0,0,0,0.5)' } : undefined}
       onClick={onClick}
       className={className}
     >
@@ -455,7 +464,7 @@ export default function App() {
       <Modal isOpen={activeModal === 'profile'} onClose={() => setActiveModal(null)} title="About Me">
         <div className="flex flex-col md:flex-row gap-6 items-start">
           <div className="w-24 h-24 rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shrink-0 flex items-center justify-center">
-            <RobotAvatar size={88} />
+            <RobotAvatar size={96} />
           </div>
           <div>
             <h3 className="text-2xl font-bold text-white">{portfolioData.profile.name}</h3>
