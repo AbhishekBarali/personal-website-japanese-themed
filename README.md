@@ -4,10 +4,11 @@ A visually stunning, performance-optimized personal portfolio featuring a Japane
 
 ## ✨ Features
 
-- **Interactive Canvas Background**: A beautiful, performant particle mesh canvas inspired by cherry blossoms.
+- **Calligraphy Silk Ribbon**: A stunning, fluid physics-based ribbon that elegantly trails the cursor like ink in water.
+- **Moody Abstract Aesthetics**: A sophisticated dark theme with subtle parchment textures, rising embers, and spinning mountain abstractions.
 - **Draggable UI Elements**: Engaging draggable grid boxes with smart click-vs-drag detection.
 - **Smooth Navigation**: Custom arrow navigation for project and music carousels.
-- **Silk Cursor**: A fluid, physics-based silk ribbon cursor that dynamically trails the mouse, elevating the interactive experience.
+- **Elegant Dot Cursor**: Native hardware-accelerated minimalist dot cursor that never lags behind text.
 - **Responsive Design**: Flawless experience across desktop, tablet, and mobile devices.
 
 ## 🚀 Quick Start
