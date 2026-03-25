@@ -261,10 +261,10 @@ export default function App() {
           
           <div className="relative z-10 mt-2 flex justify-between items-end">
             <div>
-              <p className="text-xl font-medium flex items-center gap-2">
-                Building what people <span className="font-bold text-white bg-white/10 px-2 py-0.5 rounded-md">actually use.</span>
+              <p className="text-lg md:text-xl font-medium flex flex-wrap items-center gap-x-2 gap-y-1">
+                Building what people <span className="font-bold text-white bg-white/10 px-2 py-0.5 rounded-md whitespace-nowrap text-sm md:text-lg">actually use.</span>
               </p>
-              <p className="text-sm text-white/60 mt-2 max-w-md leading-relaxed truncate">
+              <p className="text-xs md:text-sm text-white/60 mt-2 max-w-md leading-relaxed line-clamp-2 md:truncate">
                 {portfolioData.profile.bio}
               </p>
             </div>
@@ -750,6 +750,8 @@ export default function App() {
                                  src={project.image} 
                                  alt={project.name} 
                                  className={`w-full h-full ${isPortrait ? 'object-cover' : 'object-cover object-top'} scale-100 group-hover/img:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.2,0.8,0.2,1)] opacity-80 group-hover/img:opacity-100`} 
+                                 loading="lazy"
+                                 decoding="async"
                                />
                              </div>
                              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity z-20 pointer-events-none bg-black/20">
@@ -875,7 +877,7 @@ export default function App() {
                   rel="noreferrer"
                   className="group relative overflow-hidden rounded-xl bg-white/5 aspect-square border border-white/5 block cursor-pointer hover:border-white/20 hover:shadow-lg transition-all"
                 >
-                   <img src={track.image} alt={track.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                   <img src={track.image} alt={track.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all flex justify-between items-center">
                      <p className="text-xs font-bold text-white truncate">{track.name}</p>
                      <ExternalLink className="w-3 h-3 text-white/50" />
