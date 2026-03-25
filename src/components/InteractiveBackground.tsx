@@ -138,24 +138,6 @@ export default function InteractiveBackground() {
         curr.y += curr.vy;
       }
 
-      // Update Ribbon 2 (Shadow Black) runs slightly behind and offsets
-      ribbonShadow[0].x = leadX - Math.sin(time) * 6;
-      ribbonShadow[0].y = leadY - Math.cos(time) * 6;
-      for (let i = 1; i < POINTS; i++) {
-        const curr = ribbonShadow[i];
-        const prev = ribbonShadow[i - 1];
-        const dx = prev.x - curr.x;
-        const dy = prev.y - curr.y;
-        // Slightly looser tension for the shadow
-        curr.vx += dx * 0.45; 
-        curr.vy += dy * 0.45;
-        curr.vy += GRAVITY * 1.5; // Heavier
-        curr.vx *= 0.5; // Different fluid drag
-        curr.vy *= 0.5;
-        curr.x += curr.vx;
-        curr.y += curr.vy;
-      }
-
       // Draw Ribbon Function
       const drawRibbon = (ribbon: Segment[], r: number, g: number, b: number, maxThickness: number) => {
         if (!started) return;
@@ -189,9 +171,6 @@ export default function InteractiveBackground() {
         }
       };
 
-      // Draw shadow/ink ribbon first (underneath)
-      drawRibbon(ribbonShadow, 5, 5, 5, 30);
-      
       // Draw primary glowing amber/pearl ribbon (on top) - deeply satisfying ASMR feel
       drawRibbon(ribbonPrimary, 252, 211, 77, 18); // #fcd34d
 
