@@ -218,7 +218,7 @@ export default function App() {
       <InteractiveBackground />
       
       {/* Background Main Grid Highlight Filter */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[600px] bg-gradient-to-br from-indigo-500/10 via-emerald-500/5 to-amber-500/10 blur-[100px] pointer-events-none rounded-full z-0 mix-blend-screen"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[600px] bg-gradient-to-br from-indigo-500/10 via-emerald-500/5 to-amber-500/10 blur-[100px] pointer-events-none rounded-full z-0 mix-blend-screen hidden md:block"></div>
 
       <motion.div 
         initial="hidden"

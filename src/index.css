@@ -52,3 +52,22 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
+/* Optimize Mobile Performance */
+@media (max-width: 767px) {
+  /* Disable hardware-intensive backdrop blur on phones */
+  .backdrop-blur-xl, 
+  .backdrop-blur-2xl, 
+  .backdrop-blur-lg, 
+  .backdrop-blur-md, 
+  .backdrop-blur-sm, 
+  .backdrop-blur {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Prevent highly transparent boxes from blending into black text without blur */
+  .bg-\[\#050505\]\/60 {
+    background-color: #0c0c0c !important;
+  }
+}
+
