@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Github, Mail, Linkedin, ExternalLink, Building2, ArrowUpRight, X, Code, Brain, Music, GraduationCap, Globe, Rocket, ChevronLeft, ChevronRight, Cpu, Sparkles, Wrench, Cloud } from 'lucide-react';
 import InteractiveBackground from './components/InteractiveBackground';
 import PortfolioEyes from './components/PortfolioEyes';
+import { RobotAvatar } from './components/ui/robot-avatar';
 
 const portfolioData = {
   profile: {
@@ -355,11 +356,6 @@ export default function App() {
           <div className="relative z-10 h-full flex flex-col justify-between">
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-3">
-                <svg viewBox="0 0 24 24" className="w-8 h-8 text-white/90 group-hover:text-white transition-colors" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                   <path d="M12 8v4" />
-                   <path d="M12 16h.01" />
-                </svg>
                 <div>
                   <h3 className="text-2xl font-black leading-none text-white/90 tracking-tight">KAIKI</h3>
                   <p className="text-[10px] font-bold text-white/40 tracking-widest uppercase mt-1">FOUNDER & CEO</p>
@@ -457,8 +453,8 @@ export default function App() {
       {/* Modals */}
       <Modal isOpen={activeModal === 'profile'} onClose={() => setActiveModal(null)} title="About Me">
         <div className="flex flex-col md:flex-row gap-6 items-start">
-          <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-4xl font-black shadow-lg shrink-0">
-            AB
+          <div className="w-24 h-24 rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shrink-0 flex items-center justify-center">
+            <RobotAvatar size={88} />
           </div>
           <div>
             <h3 className="text-2xl font-bold text-white">{portfolioData.profile.name}</h3>
@@ -482,11 +478,8 @@ export default function App() {
           {Object.entries(portfolioData.skills).map(([category, skills]) => (
             <div key={category} className="group relative rounded-lg border border-white/10 bg-white/[0.02] p-6 hover:bg-white/[0.04] transition-colors overflow-hidden">
                <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.01] blur-2xl rounded-full translate-x-12 -translate-y-12"></div>
-               <div className="flex justify-between items-baseline mb-6 border-b border-white/5 pb-4">
-                  <h4 className="text-sm font-mono font-bold tracking-widest text-white/80 uppercase">{category}</h4>
-                  <span className="text-[10px] text-white/30 font-mono italic">
-                    {skills.length < 10 ? `0${skills.length}` : skills.length} ITEMS
-                  </span>
+               <div className="mb-6 border-b border-white/5 pb-4">
+                  <h4 className="text-base font-bold tracking-tight text-white/90 uppercase">{category}</h4>
                </div>
                <ul className="flex flex-col gap-3">
                  {skills.map((skill, i) => (
@@ -564,7 +557,7 @@ export default function App() {
 
           <div>
             <h4 className="font-black text-white mb-4 text-base flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-400" /> Backed By
+              Backed By
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {portfolioData.company.programs.map(prog => (
@@ -716,12 +709,19 @@ export default function App() {
             
             <div className="grid grid-cols-2 gap-3">
               {portfolioData.hobbies.music.tracks.map((track, i) => (
-                <div key={track.name} className="group relative overflow-hidden rounded-xl bg-white/5 aspect-square border border-white/5">
+                <a 
+                  key={track.name} 
+                  href={`https://open.spotify.com/search/${encodeURIComponent(track.name)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group relative overflow-hidden rounded-xl bg-white/5 aspect-square border border-white/5 block cursor-pointer hover:border-white/20 hover:shadow-lg transition-all"
+                >
                    <img src={track.image} alt={track.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all flex justify-between items-center">
                      <p className="text-xs font-bold text-white truncate">{track.name}</p>
+                     <ExternalLink className="w-3 h-3 text-white/50" />
                    </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>
