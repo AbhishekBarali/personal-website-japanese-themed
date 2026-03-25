@@ -261,8 +261,8 @@ export default function App() {
           
           <div className="relative z-10 mt-2 flex justify-between items-end">
             <div>
-              <p className="text-lg md:text-xl font-medium flex flex-wrap items-center gap-x-2 gap-y-1">
-                Building what people <span className="font-bold text-white bg-white/10 px-2 py-0.5 rounded-md whitespace-nowrap text-sm md:text-lg">actually use.</span>
+              <p className="text-lg md:text-xl font-medium leading-snug">
+                Building what people <span className="inline-block font-bold text-white bg-white/10 px-2 py-0.5 rounded-md whitespace-nowrap text-sm md:text-lg align-baseline ml-1">actually use.</span>
               </p>
               <p className="text-xs md:text-sm text-white/60 mt-2 max-w-md leading-relaxed line-clamp-2 md:truncate">
                 {portfolioData.profile.bio}
