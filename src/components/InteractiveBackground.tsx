@@ -142,33 +142,53 @@ export default function InteractiveBackground() {
       const drawRibbon = (ribbon: Segment[], r: number, g: number, b: number, maxThickness: number) => {
         if (!started) return;
         
-        ctx.lineCap = 'butt'; // Remove overlapping round caps that create visible dots
-        ctx.lineJoin = 'miter';
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        // Use default blending for the solid body to prevent blending artifacts
+        ctx.globalCompositeOperation = 'source-over';
 
-        // Draw piecewise with decreasing opacity and thickness for tapering effect
-        for (let i = 0; i < POINTS - 1; i++) {
+        // Draw piecewise from tail to head (back-to-front).
+        // This ensures thicker segments are drawn OVER thinner ones, perfectly
+        // eclipsing the round caps of the previous segment and hiding all dots.
+        for (let i = POINTS - 2; i >= 1; i--) {
+          const xc = (ribbon[i].x + ribbon[i + 1].x) / 2;
+          const yc = (ribbon[i].y + ribbon[i + 1].y) / 2;
+          
+          const prevXc = (ribbon[i - 1].x + ribbon[i].x) / 2;
+          const prevYc = (ribbon[i - 1].y + ribbon[i].y) / 2;
+
           ctx.beginPath();
-          ctx.moveTo(ribbon[i].x, ribbon[i].y);
-          ctx.lineTo(ribbon[i + 1].x, ribbon[i + 1].y);
+          ctx.moveTo(xc, yc);
+          ctx.quadraticCurveTo(ribbon[i].x, ribbon[i].y, prevXc, prevYc);
           
-          // Taper the thickness
+          // Taper the thickness smoothly down to the tail
           const thicknessScale = 1 - (i / POINTS);
-          ctx.lineWidth = maxThickness * thicknessScale;
+          ctx.lineWidth = maxThickness * Math.pow(thicknessScale, 1.2);
           
-          // Taper the opacity
-          const opacity = Math.pow(thicknessScale, 1.5);
-          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
-          
-          // Glow effect at the head
-          if (i < 10) {
-            ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 1)`;
-            ctx.shadowBlur = 10 * (1 - i / 10);
-          } else {
-            ctx.shadowBlur = 0;
-          }
+          // Deep, relaxing ASMR solid gold - zero transparency so zero overlap dots!
+          ctx.strokeStyle = `rgba(${r * 0.7}, ${g * 0.7}, ${b * 0.7}, 1)`;
+          ctx.shadowBlur = 0; // Removing shadow from body for peak performance & clean look
           
           ctx.stroke();
         }
+
+        // Add completely separate glowing head orb attached to the front
+        ctx.globalCompositeOperation = 'screen';
+        
+        // Ambient soft ASMR glow
+        ctx.beginPath();
+        ctx.arc(ribbon[0].x, ribbon[0].y, maxThickness * 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.3)`;
+        ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 1)`;
+        ctx.shadowBlur = 30;
+        ctx.fill();
+        
+        // Bright core
+        ctx.beginPath();
+        ctx.arc(ribbon[0].x, ribbon[0].y, maxThickness * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowBlur = 10;
+        ctx.fill();
       };
 
       // Draw primary glowing amber/pearl ribbon (on top) - deeply satisfying ASMR feel
