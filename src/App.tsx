@@ -442,7 +442,7 @@ export default function App() {
           <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px] opacity-20 filter grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-500 pointer-events-none mix-blend-screen overflow-hidden rounded-3xl">
             {portfolioData.hobbies.music.tracks.slice(0, 4).map((t, i) => (
               <div key={`music-${i}`} className="overflow-hidden bg-[#111]">
-                <img src={t.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" />
+                <img src={t.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" loading="lazy" decoding="async" />
               </div>
             ))}
           </div>

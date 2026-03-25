@@ -12,15 +12,30 @@ export default function PortfolioEyes({ size = 48, className = '' }: PortfolioEy
 
   useEffect(() => {
     const maxMove = size * 0.2;
+    let rafId = 0;
+    let latestX = 0;
+    let latestY = 0;
 
+    // Store coords without triggering any React work
     const onPointerMove = (e: PointerEvent) => {
+      latestX = e.clientX;
+      latestY = e.clientY;
+
+      if (!rafId) {
+        rafId = requestAnimationFrame(updatePupils);
+      }
+    };
+
+    // Batch DOM writes into a single frame
+    const updatePupils = () => {
+      rafId = 0;
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
 
-      const dx = e.clientX - cx;
-      const dy = e.clientY - cy;
+      const dx = latestX - cx;
+      const dy = latestY - cy;
       const angle = Math.atan2(dy, dx);
 
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -38,7 +53,10 @@ export default function PortfolioEyes({ size = 48, className = '' }: PortfolioEy
     };
 
     window.addEventListener('pointermove', onPointerMove);
-    return () => window.removeEventListener('pointermove', onPointerMove);
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [size]);
 
   const eyeSize = size;

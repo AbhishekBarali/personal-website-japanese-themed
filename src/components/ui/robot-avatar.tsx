@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface RobotAvatarProps {
@@ -12,47 +12,58 @@ export function RobotAvatar({ size = 96, className = '' }: RobotAvatarProps) {
   const [expression, setExpression] = useState<Expression>('neutral');
   const [blinking, setBlinking] = useState(false);
   const [lookPos, setLookPos] = useState({ x: 0, y: 0 });
-  const [lastMouseTime, setLastMouseTime] = useState(Date.now());
   const [isHovered, setIsHovered] = useState(false);
   const impressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  // Use ref instead of state to avoid re-renders on every mouse move
+  const lastMouseTimeRef = useRef(Date.now());
+  const rafIdRef = useRef(0);
   
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setLastMouseTime(Date.now());
+      // Just store the timestamp — no state update, no re-render
+      lastMouseTimeRef.current = Date.now();
 
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight / 2;
+      // Throttle the actual processing to one RAF per frame
+      if (rafIdRef.current) return;
       
-      // Determine if mouse is outside the 'About Me' centered modal (~600x400)
-      const isOutsideBox = Math.abs(e.clientX - cx) > 320 || Math.abs(e.clientY - cy) > 240;
+      const clientX = e.clientX;
+      const clientY = e.clientY;
 
-      setExpression(prev => {
-        if (prev === 'happy') return 'happy'; // Maintain click blush state 
+      rafIdRef.current = requestAnimationFrame(() => {
+        rafIdRef.current = 0;
+
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
         
-        if (isOutsideBox) {
-          if (impressTimeoutRef.current) clearTimeout(impressTimeoutRef.current);
-          impressTimeoutRef.current = setTimeout(() => {
-            setExpression(curr => curr === 'impressed' ? 'neutral' : curr);
-          }, 800);
-          return 'impressed';
-        } else {
-          // If mouse is near avatar / inside modal
-          return (prev === 'impressed' || prev === 'sleepy') ? 'neutral' : prev;
-        }
+        const isOutsideBox = Math.abs(clientX - cx) > 320 || Math.abs(clientY - cy) > 240;
+
+        setExpression(prev => {
+          if (prev === 'happy') return 'happy';
+          
+          if (isOutsideBox) {
+            if (impressTimeoutRef.current) clearTimeout(impressTimeoutRef.current);
+            impressTimeoutRef.current = setTimeout(() => {
+              setExpression(curr => curr === 'impressed' ? 'neutral' : curr);
+            }, 800);
+            return 'impressed';
+          } else {
+            return (prev === 'impressed' || prev === 'sleepy') ? 'neutral' : prev;
+          }
+        });
+
+        const dx = (clientX - cx) / cx;
+        const dy = (clientY - cy) / cy;
+
+        setLookPos({ x: dx * 4, y: dy * 3 });
       });
-
-      const dx = (e.clientX - cx) / cx;
-      const dy = (e.clientY - cy) / cy;
-
-      setLookPos({ x: dx * 4, y: dy * 3 });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
 
     const idleCheck = setInterval(() => {
-      if (Date.now() - lastMouseTime > 6000 && !isHovered) {
+      if (Date.now() - lastMouseTimeRef.current > 6000 && !isHovered) {
         setExpression(prev => (prev !== 'happy' && prev !== 'impressed') ? 'sleepy' : prev);
       }
     }, 1000);
@@ -61,13 +72,13 @@ export function RobotAvatar({ size = 96, className = '' }: RobotAvatarProps) {
       window.removeEventListener('mousemove', handleMouseMove);
       clearInterval(idleCheck);
       if (impressTimeoutRef.current) clearTimeout(impressTimeoutRef.current);
+      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
     };
-  }, [lastMouseTime, isHovered]);
+  }, [isHovered]);
 
   useEffect(() => {
     if (expression === 'sleepy' || expression === 'happy' || expression === 'surprised' || expression === 'impressed') return;
     
-    // Quick blink loop
     const blink = () => {
       setBlinking(true);
       setTimeout(() => setBlinking(false), 150);
@@ -82,20 +93,15 @@ export function RobotAvatar({ size = 96, className = '' }: RobotAvatarProps) {
     return () => clearInterval(interval);
   }, [expression]);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const handleInteraction = () => {
+  const handleInteraction = useCallback(() => {
     setExpression('happy');
     setTimeout(() => {
       setExpression(prev => prev === 'happy' ? 'neutral' : prev);
     }, 2500);
-  };
+  }, []);
 
   const isSleeping = expression === 'sleepy';
   const isHappy = expression === 'happy';
@@ -159,7 +165,7 @@ export function RobotAvatar({ size = 96, className = '' }: RobotAvatarProps) {
             ease: "easeInOut"
           }}
         >
-          {/* Head Base (Squishy rounded rect) - No ears or leaf! */}
+          {/* Head Base */}
           <rect x="16" y="24" width="64" height="60" rx="30" fill="url(#foxWhite)" stroke="rgba(255,255,255,0.7)" strokeWidth="1" />
 
           {/* Face Elements - Track Mouse */}
@@ -182,7 +188,6 @@ export function RobotAvatar({ size = 96, className = '' }: RobotAvatarProps) {
                 animate={{ x: 34 - eyeWidth / 2, y: 56 - eyeHeight / 2, width: eyeWidth, height: eyeHeight, rx: eyeWidth / 2 }}
                 fill={eyeColor} transition={springTransition}
               />
-              {/* Sparkle/Catchlight */}
               <motion.circle
                 animate={{ 
                   x: 34 - 1.5, 
