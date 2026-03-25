@@ -7,8 +7,8 @@ import PortfolioEyes from './components/PortfolioEyes';
 const portfolioData = {
   profile: {
     name: "Abhishek Barali",
-    title: "Builder · AI Practitioner · Founder",
-    bio: "20-year-old CS student and founder who recently went all-in on building — shipping 6 projects, founding a company, and deploying multiple AI-powered products. Now focused on building products that people actually use.",
+    title: "Builder · AI Engineer",
+    bio: "20-year-old CS student who shipped 6 projects and founded a company. Building AI-powered products — from chat platforms to code security scanners.",
     location: "Kathmandu, Nepal"
   },
   company: {
@@ -251,7 +251,7 @@ export default function App() {
           <div className="relative z-10 mt-2 flex justify-between items-end">
             <div>
               <p className="text-xl font-medium flex items-center gap-2">
-                I build <span className="font-bold text-white bg-white/10 px-2 py-0.5 rounded-md">Full Stack & AI</span>
+                Building what people <span className="font-bold text-white bg-white/10 px-2 py-0.5 rounded-md">actually use.</span>
               </p>
               <p className="text-sm text-white/60 mt-2 max-w-md leading-relaxed truncate">
                 {portfolioData.profile.bio}
@@ -355,8 +355,10 @@ export default function App() {
           <div className="relative z-10 h-full flex flex-col justify-between">
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-3">
-                <svg viewBox="0 0 24 24" className="w-8 h-8 text-white/90 group-hover:text-white transition-colors" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                <svg viewBox="0 0 24 24" className="w-8 h-8 text-white/90 group-hover:text-white transition-colors" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                   <path d="M12 8v4" />
+                   <path d="M12 16h.01" />
                 </svg>
                 <div>
                   <h3 className="text-2xl font-black leading-none text-white/90 tracking-tight">KAIKI</h3>
@@ -499,44 +501,85 @@ export default function App() {
         </div>
       </Modal>
 
-      <Modal isOpen={activeModal === 'company'} onClose={() => setActiveModal(null)} title="Company" maxWidth="max-w-xl">
+      <Modal isOpen={activeModal === 'company'} onClose={() => setActiveModal(null)} title="Company" maxWidth="max-w-2xl">
         <div className="space-y-8">
-          <div className="flex items-baseline justify-between border-b border-white/10 pb-6">
-            <div>
-              <h3 className="text-3xl font-black text-white tracking-tight uppercase flex items-center gap-3">
-                {portfolioData.company.full}
-              </h3>
-              <p className="text-white/40 font-mono text-xs uppercase tracking-widest mt-2">{portfolioData.company.status}</p>
+          <div className="flex items-start justify-between border-b border-white/10 pb-6 group pt-2">
+            <div className="flex items-center gap-5 sm:gap-6">
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-amber-500/20 flex items-center justify-center shrink-0 overflow-hidden shadow-[0_0_30px_rgba(251,191,36,0.15)] group-hover:shadow-[0_0_40px_rgba(251,191,36,0.25)] transition-shadow duration-500">
+                 <div className="absolute inset-0 bg-amber-400/10 blur-xl rounded-full group-hover:bg-amber-400/20 transition-colors"></div>
+                 <svg viewBox="0 0 100 100" className="w-10 h-10 sm:w-12 sm:h-12 text-amber-400 relative z-10" fill="none" stroke="currentColor" strokeWidth="3">
+                   <circle cx="50" cy="50" r="40" strokeOpacity="0.2" className="animate-[spin_10s_linear_infinite]" strokeDasharray="10 10" />
+                   <polygon points="50 15, 85 80, 15 80" className="animate-[spin_8s_linear_infinite_reverse]" strokeOpacity="0.4" />
+                   <path d="M50 30 L70 65 L30 65 Z" strokeWidth="4" />
+                   <circle cx="50" cy="50" r="4" fill="currentColor" stroke="none" />
+                 </svg>
+              </div>
+              <div className="flex flex-col justify-center">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight flex items-center gap-3">
+                  {portfolioData.company.full}
+                </h3>
+                 <p className="text-amber-400/80 font-bold text-[10px] sm:text-xs tracking-widest mt-1 uppercase">
+                   {portfolioData.company.status}
+                 </p>
+              </div>
             </div>
-            <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-xs font-mono font-bold tracking-tight text-white/50 hover:text-white transition-colors">
-              [VISIT SITE] <ArrowUpRight className="w-3 h-3" />
+            <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="hidden sm:flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-full text-xs font-bold tracking-tight text-white/80 hover:text-white transition-all border border-white/10 hover:border-white/20 hover:scale-105 shrink-0 mt-3 md:mt-2">
+              VISIT SITE <ExternalLink className="w-4 h-4" />
             </a>
           </div>
           
-          <div className="text-white/80 leading-relaxed text-base">
-            <h4 className="font-bold text-white mb-2 uppercase text-xs tracking-widest font-mono">Mission Statement</h4>
-            <p>
-              Targeting B2B SaaS with AI-native products that solve deep workflow problems. Developing enterprise-grade tools with unparalleled developer experience.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+             {/* Mission */}
+             <div className="bg-gradient-to-br from-indigo-500/5 to-transparent p-6 rounded-2xl border border-indigo-500/20 shadow-lg relative overflow-hidden group hover:border-indigo-500/30 transition-colors duration-300">
+               <div className="absolute -right-10 -top-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+               <div className="flex items-center gap-3 mb-3 relative z-10">
+                 <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                   <Building2 className="w-4 h-4" />
+                 </div>
+                 <h4 className="font-bold text-white text-base">Mission</h4>
+               </div>
+               <p className="text-white/60 leading-relaxed text-sm relative z-10">
+                 Targeting B2B SaaS with AI-native products that solve deep workflow problems. Developing enterprise-grade tools with unparalleled developer experience.
+               </p>
+             </div>
 
-          <div className="bg-[#050505] p-5 rounded-xl border border-white/5 shadow-inner">
-            <h4 className="font-bold text-white uppercase text-xs tracking-widest font-mono mb-2">Primary Initiative</h4>
-            <p className="text-white/70">AI-powered code security scanner currently in private beta, establishing early stage B2B validation frameworks.</p>
+             {/* Initiative */}
+             <div className="bg-gradient-to-br from-emerald-500/5 to-transparent p-6 rounded-2xl border border-emerald-500/20 shadow-lg relative overflow-hidden group hover:border-emerald-500/30 transition-colors duration-300">
+               <div className="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+               <div className="flex items-center gap-3 mb-3 relative z-10">
+                 <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                   <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                 </div>
+                 <h4 className="font-bold text-white text-base">Current Build</h4>
+               </div>
+               <div className="flex items-center gap-2 mb-2 relative z-10">
+                 <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></div>
+                 <span className="text-[10px] font-bold text-emerald-300 uppercase tracking-widest">Private Beta</span>
+               </div>
+               <p className="text-white/60 leading-relaxed text-sm relative z-10">
+                 AI-powered code security scanner currently establishing early stage B2B validation frameworks.
+               </p>
+             </div>
           </div>
 
           <div>
-            <h4 className="font-bold text-white mb-4 uppercase text-xs tracking-widest font-mono">Infrastructure Support</h4>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <h4 className="font-black text-white mb-4 text-base flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-amber-400" /> Backed By
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {portfolioData.company.programs.map(prog => (
-                <li key={prog} className="flex items-center gap-3 text-white/70 bg-white/5 px-3 py-2 rounded-lg border border-white/5 font-mono text-xs shadow-sm">
-                   <svg viewBox="0 0 24 24" className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                     <polyline points="20 6 9 17 4 12"></polyline>
-                   </svg>
-                  {prog}
-                </li>
+                <div key={prog} className="flex flex-col justify-center text-white/80 bg-white/[0.03] px-4 py-3 rounded-xl border border-white/10 shadow-sm hover:bg-white/[0.06] hover:border-white/20 transition-all cursor-default relative overflow-hidden group">
+                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-white/10 to-transparent group-hover:from-white/30 transition-colors"></div>
+                   <span className="text-sm font-bold tracking-tight">{prog}</span>
+                </div>
               ))}
-            </ul>
+            </div>
+          </div>
+          
+          <div className="sm:hidden pt-4 border-t border-white/5">
+             <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-white/5 rounded-xl text-sm font-bold text-white">
+                Visit Website <ExternalLink className="w-4 h-4" />
+             </a>
           </div>
         </div>
       </Modal>
