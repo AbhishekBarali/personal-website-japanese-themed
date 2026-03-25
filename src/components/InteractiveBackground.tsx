@@ -54,25 +54,15 @@ export default function InteractiveBackground() {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      const target = e.target as Element;
-      // Detect if hover is over a Portfolio Card or Modal
-      const isOverUI = target.closest('.backdrop-blur-xl, .backdrop-blur-2xl, a, button');
-
-      if (isOverUI) {
-        // The user crossed into an opaque UI element!
-        // Instantly force 'idle' mode so the ribbon stops moving and rapidly fades out
-        idleTime = 999;
-      } else {
-        if (!started) {
-          started = true;
-          // Snap instantly to mouse on first move
-          ribbonPrimary.forEach(p => { p.x = e.clientX; p.y = e.clientY; });
-          ribbonShadow.forEach(p => { p.x = e.clientX; p.y = e.clientY; });
-        }
-        targetX = e.clientX;
-        targetY = e.clientY;
-        idleTime = 0;
+      if (!started) {
+        started = true;
+        // Snap instantly to mouse on first move
+        ribbonPrimary.forEach(p => { p.x = e.clientX; p.y = e.clientY; });
+        ribbonShadow.forEach(p => { p.x = e.clientX; p.y = e.clientY; });
       }
+      targetX = e.clientX;
+      targetY = e.clientY;
+      idleTime = 0;
     };
 
     window.addEventListener('resize', resize);
