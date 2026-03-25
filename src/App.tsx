@@ -27,11 +27,12 @@ const portfolioData = {
     { name: "Barali Life", desc: "Personal Life OS with dynamic diet engine and gym split.", link: "https://github.com/AbhishekBarali/Barali-Life", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=600&auto=format&fit=crop" }
   ],
   skills: {
-    Frontend: ['React 18/19', 'Next.js', 'Vite', 'Tailwind CSS'],
-    Backend: ['FastAPI', 'SQLAlchemy', 'Prisma', 'Node.js', 'Python'],
-    AI: ['OpenAI', 'Anthropic', 'Gemini', 'NVIDIA NIM', 'Unsloth', 'Agents'],
-    Databases: ['PostgreSQL', 'SQLite', 'Convex'],
-    Tools: ['Docker', 'Vercel', 'Streamlit', 'FL Studio']
+    Frontend: ['React', 'Next.js', 'Vite', 'Tailwind CSS'],
+    Backend: ['Node.js', 'Python', 'FastAPI'],
+    Databases: ['PostgreSQL', 'SQLite', 'Convex', 'Prisma'],
+    Cloud: ['AWS', 'Microsoft Azure', 'Docker', 'Vercel'],
+    AI: ['LLMs & APIs', 'Unsloth', 'Local AI', 'AI Agents'],
+    Tools: ['Git', 'Streamlit', 'Playwright', 'FL Studio']
   },
   aiWorkflow: {
     mcpTools: [
@@ -41,29 +42,33 @@ const portfolioData = {
       { name: 'Stitch', desc: 'Data pipeline orchestration' },
       { name: 'GitHub MCP', desc: 'Repo, PR & issue management' },
     ],
-    cloudModels: ['OpenAI (GPT-4.5)', 'Anthropic (Claude 4.6)', 'Google (Gemini 3.1)'],
+    cloudModels: ['OpenAI', 'Anthropic', 'Google DeepMind', 'DeepSeek', 'Qwen', 'MiniMax', 'GLM'],
     contextEngineering: [
-      'Custom agent skills & copilot instructions',
-      'Persistent memory systems across sessions',
-      'Spec-based coding with context-rich prompts',
-      'MCP server orchestration for tool-augmented agents',
+      'Agentic primitives with domain-scoped tool boundaries',
+      'Persistent memory architecture across agent sessions',
+      'Spec-driven development with structured validation gates',
+      'MCP server orchestration for standardized tool access',
     ],
-    philosophy: 'Context engineering over prompt engineering — designing the full information environment around AI, not just the prompt.',
+    philosophy: 'Prompts are disposable. The architecture that feeds the model the right context at the right time — that\u0027s what compounds.',
   },
   aiExperience: [
     { area: "LLM Integration", details: "Multi-provider apps using OpenAI, Anthropic, Gemini, NVIDIA NIM" },
     { area: "AI Agents", details: "Designed agent-based systems with orchestration, tool use, MCP" },
     { area: "Fine-Tuning", details: "Hands-on with Unsloth for efficient LLM fine-tuning (Llama, DeepSeek-R1)" }
   ],
-  music: {
-    title: "Music Production",
-    details: "Composed, mixed, and mastered original digital tracks using FL Studio. Released on Spotify.",
-    tracks: [
-      { name: "Breathless Echo", image: "https://i.scdn.co/image/ab67616d0000b27340cbf7b63a507ca241d02b36" },
-      { name: "Gentle Breeze", image: "https://i.scdn.co/image/ab67616d0000b2738a5189a08e4b16bd4c9f394f" },
-      { name: "Mellow & Missing", image: "https://i.scdn.co/image/ab67616d0000b273f64db69926aaa3f96ddea62e" },
-      { name: "Fragile Bonds", image: "https://i.scdn.co/image/ab67616d0000b273d1a046a7da4d41415c57b882" }
-    ]
+  hobbies: {
+    music: {
+      details: "Composed, mixed, and mastered original digital tracks using FL Studio. Released on Spotify.",
+      tracks: [
+        { name: "Breathless Echo", image: "https://i.scdn.co/image/ab67616d0000b27340cbf7b63a507ca241d02b36" },
+        { name: "Gentle Breeze", image: "https://i.scdn.co/image/ab67616d0000b2738a5189a08e4b16bd4c9f394f" },
+        { name: "Mellow & Missing", image: "https://i.scdn.co/image/ab67616d0000b273f64db69926aaa3f96ddea62e" },
+        { name: "Fragile Bonds", image: "https://i.scdn.co/image/ab67616d0000b273d1a046a7da4d41415c57b882" }
+      ]
+    },
+    reading: {
+      details: "I like reading and watching it.",
+    }
   }
 };
 
@@ -261,20 +266,25 @@ export default function App() {
           onClick={() => setActiveModal('stack')}
           className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-xl rounded-3xl p-5 border border-white/5 flex flex-col justify-between overflow-hidden shadow-2xl cursor-pointer group hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
-          <div className="flex justify-between items-start">
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="flex justify-between items-start relative z-10">
             <div className="flex items-center gap-2">
-              <Code className="w-6 h-6 text-white/30" />
-              <h2 className="text-xl font-black leading-none tracking-tight group-hover:text-teal-400 transition-colors">TECH STACK</h2>
+              <svg viewBox="0 0 24 24" className="w-6 h-6 text-white/40 group-hover:text-teal-400 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              <h2 className="text-xl font-black leading-none tracking-tight group-hover:text-teal-400 transition-colors">STACK</h2>
             </div>
             <ArrowUpRight className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
           </div>
-          <div className="flex flex-wrap gap-1.5 mt-3">
-            {['React', 'Next.js', 'Python', 'FastAPI', 'PostgreSQL', 'Docker'].map(item => (
+          <div className="flex flex-wrap gap-1.5 mt-3 relative z-10">
+            {['React', 'Next.js', 'Python', 'AWS', 'Docker'].map(item => (
               <div key={item} className="px-2 py-0.5 text-[10px] font-medium bg-white/5 border border-white/10 rounded-md text-white/60">
                 {item}
               </div>
             ))}
-            <div className="px-2 py-0.5 text-[10px] font-medium bg-white/5 border border-white/10 rounded-md text-white/40">+{Object.values(portfolioData.skills).flat().length - 6} more</div>
+            <div className="px-2 py-0.5 text-[10px] font-medium bg-white/5 border border-white/10 rounded-md text-teal-400/60">+ more</div>
           </div>
         </DraggableBox>
 
@@ -341,33 +351,27 @@ export default function App() {
           onClick={() => setActiveModal('company')}
           className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-xl rounded-3xl p-5 border border-white/5 relative overflow-hidden group cursor-pointer shadow-2xl hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-amber-500/10 blur-3xl rounded-full pointer-events-none group-hover:bg-amber-500/20 transition-all duration-700"></div>
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 blur-3xl rounded-full pointer-events-none group-hover:bg-white/10 transition-all duration-700"></div>
           <div className="relative z-10 h-full flex flex-col justify-between">
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-3">
-                <svg viewBox="0 0 100 100" className="w-10 h-10 text-amber-400/80 group-hover:text-amber-300 transition-colors drop-shadow-[0_0_8px_rgba(251,191,36,0.3)]">
-                  <rect x="20" y="20" width="60" height="60" rx="12" fill="none" stroke="currentColor" strokeWidth="4" />
-                  <path d="M20 45 L80 45" stroke="currentColor" strokeWidth="4" opacity="0.6" strokeDasharray="6 4" />
-                  <path d="M50 20 L50 80" stroke="currentColor" strokeWidth="4" opacity="0.6" strokeDasharray="6 4" />
-                  <circle cx="50" cy="50" r="10" fill="currentColor" opacity="0.9" />
-                  <circle cx="50" cy="50" r="2" fill="#000" />
+                <svg viewBox="0 0 24 24" className="w-8 h-8 text-white/90 group-hover:text-white transition-colors" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
                 <div>
                   <h3 className="text-2xl font-black leading-none text-white/90 tracking-tight">KAIKI</h3>
-                  <p className="text-[10px] font-bold text-amber-400/70 tracking-widest uppercase mt-1">FOUNDER & CEO</p>
+                  <p className="text-[10px] font-bold text-white/40 tracking-widest uppercase mt-1">FOUNDER & CEO</p>
                 </div>
               </div>
               <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center backdrop-blur-md group-hover:bg-white/20 transition-colors">
                 <ArrowUpRight className="w-4 h-4 text-white" />
               </div>
             </div>
-            <div className="mt-4 bg-white/5 border border-white/5 rounded-xl p-3 relative overflow-hidden">
-              <div className="absolute -right-4 -top-4 w-12 h-12 bg-white/5 rounded-full blur-md"></div>
+            <div className="mt-4 bg-[#0a0a0a]/80 border border-white/5 rounded-xl p-3 relative overflow-hidden">
               <p className="text-xs text-white/70 font-medium z-10 relative">B2B Security & AI</p>
               <div className="flex items-center gap-2 mt-2 z-10 relative">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_5px_rgba(16,185,129,0.8)] animate-pulse"></div>
-                <p className="text-[10px] text-white/50 uppercase tracking-widest">Self-Funded</p>
+                <div className="w-1.5 h-1.5 rounded-full bg-white/30 hidden"></div>
+                <p className="text-[10px] text-white/50 uppercase tracking-widest">Building Phase</p>
               </div>
             </div>
           </div>
@@ -423,33 +427,26 @@ export default function App() {
         {/* Hobbies Box */}
         <DraggableBox
           variants={itemVariants}
-          onClick={() => setActiveModal('music')}
+          onClick={() => setActiveModal('hobbies')}
           className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-xl rounded-3xl p-5 border border-white/5 flex flex-col justify-between relative overflow-hidden shadow-2xl group cursor-pointer hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-[5]"></div>
-          
-          {/* Collage Background */}
-          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-1 p-2 opacity-50 group-hover:opacity-80 transition-opacity duration-700 group-hover:scale-105 pointer-events-none mix-blend-screen overflow-hidden rounded-3xl">
-            {portfolioData.music.tracks.map((t, i) => (
-              <div key={i} className="rounded-xl overflow-hidden bg-white/5 shadow-2xl">
-                <img src={t.image} alt={t.name} className="w-full h-full object-cover blur-[1px] group-hover:blur-0 transition-all duration-500" />
+          {/* Subtle minimal collage */}
+          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px] opacity-20 filter grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-500 pointer-events-none mix-blend-screen overflow-hidden rounded-3xl">
+            {portfolioData.hobbies.music.tracks.slice(0, 4).map((t, i) => (
+              <div key={`music-${i}`} className="overflow-hidden bg-[#111]">
+                <img src={t.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" />
               </div>
             ))}
           </div>
 
           <div className="flex justify-between items-start relative z-10">
-            <div className="bg-black/40 backdrop-blur-md p-2.5 rounded-2xl border border-white/10 shadow-xl">
-              <svg viewBox="0 0 24 24" className="w-6 h-6 text-emerald-400 group-hover:text-emerald-300 group-hover:scale-110 transition-all">
-                <path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-              </svg>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors shadow-xl">
-              <ArrowUpRight className="w-4 h-4 text-white" />
+            <h3 className="text-2xl font-black tracking-tight text-white/95">HOBBIES</h3>
+            <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors shadow-xl text-white">
+              <ArrowUpRight className="w-4 h-4" />
             </div>
           </div>
           <div className="relative z-10 mt-auto drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] pb-1">
-            <h3 className="text-2xl font-black tracking-tight text-white/95">Hobbies</h3>
-            <p className="text-sm font-semibold text-emerald-400 mt-1">Music Prod. & Spotify</p>
+            <p className="text-sm font-semibold text-white/60">Music Prod, Anime, Manga & Manhwa</p>
           </div>
         </DraggableBox>
 
@@ -478,74 +475,64 @@ export default function App() {
         </div>
       </Modal>
 
-      <Modal isOpen={activeModal === 'stack'} onClose={() => setActiveModal(null)} title="Tech Stack">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <Modal isOpen={activeModal === 'stack'} onClose={() => setActiveModal(null)} title="Tech Stack" maxWidth="max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Object.entries(portfolioData.skills).map(([category, skills]) => (
-            <div key={category} className="bg-white/5 p-4 rounded-2xl border border-white/10">
-              <h4 className="text-lg font-bold text-white mb-3">{category}</h4>
-              <div className="flex flex-wrap gap-2">
-                {skills.map(skill => (
-                  <span key={skill} className="px-3 py-1.5 bg-white/10 rounded-lg text-sm font-medium">
-                    {skill}
+            <div key={category} className="group relative rounded-lg border border-white/10 bg-white/[0.02] p-6 hover:bg-white/[0.04] transition-colors overflow-hidden">
+               <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.01] blur-2xl rounded-full translate-x-12 -translate-y-12"></div>
+               <div className="flex justify-between items-baseline mb-6 border-b border-white/5 pb-4">
+                  <h4 className="text-sm font-mono font-bold tracking-widest text-white/80 uppercase">{category}</h4>
+                  <span className="text-[10px] text-white/30 font-mono italic">
+                    {skills.length < 10 ? `0${skills.length}` : skills.length} ITEMS
                   </span>
-                ))}
-              </div>
+               </div>
+               <ul className="flex flex-col gap-3">
+                 {skills.map((skill, i) => (
+                   <li key={skill} className="flex items-center gap-3 text-white/70">
+                     <span className="w-1.5 h-1.5 bg-white/20 rounded-sm"></span>
+                     <span className="text-sm font-medium tracking-tight">{skill}</span>
+                   </li>
+                 ))}
+               </ul>
             </div>
           ))}
         </div>
       </Modal>
 
-      <Modal isOpen={activeModal === 'company'} onClose={() => setActiveModal(null)} title="KAIKI" maxWidth="max-w-2xl">
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-5">
-              <div className="w-16 h-16 bg-gradient-to-br from-amber-500/10 to-amber-900/10 border border-amber-500/20 rounded-2xl flex items-center justify-center shadow-[0_0_25px_rgba(251,191,36,0.15)] relative overflow-hidden">
-                <div className="absolute inset-0 bg-amber-500/5 blur-xl rounded-full"></div>
-                <svg viewBox="0 0 100 100" className="w-10 h-10 text-amber-400 relative z-10" fill="none" stroke="currentColor" strokeWidth="5">
-                  <path d="M20 20 L80 20 L80 80 L20 80 Z" opacity="0.4" />
-                  <path d="M35 35 L65 35 L65 65 L35 65 Z" strokeWidth="6" />
-                  <circle cx="50" cy="50" r="4" fill="currentColor" stroke="none" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-2xl font-black text-white flex items-center gap-3">
-                  {portfolioData.company.full}
-                  <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 transition-colors rounded-full text-xs font-bold font-mono tracking-tight text-white/90">
-                    KAIKI.DEV <ArrowUpRight className="w-3 h-3" />
-                  </a>
-                </h3>
-                <p className="text-white/60 font-medium mt-1">{portfolioData.company.status}</p>
-              </div>
+      <Modal isOpen={activeModal === 'company'} onClose={() => setActiveModal(null)} title="Company" maxWidth="max-w-xl">
+        <div className="space-y-8">
+          <div className="flex items-baseline justify-between border-b border-white/10 pb-6">
+            <div>
+              <h3 className="text-3xl font-black text-white tracking-tight uppercase flex items-center gap-3">
+                {portfolioData.company.full}
+              </h3>
+              <p className="text-white/40 font-mono text-xs uppercase tracking-widest mt-2">{portfolioData.company.status}</p>
             </div>
+            <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-xs font-mono font-bold tracking-tight text-white/50 hover:text-white transition-colors">
+              [VISIT SITE] <ArrowUpRight className="w-3 h-3" />
+            </a>
           </div>
           
-          <div className="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-lg mt-4 text-white/90 leading-relaxed text-lg">
-            <h4 className="font-bold text-xl text-white mb-3">Honest Plan</h4>
+          <div className="text-white/80 leading-relaxed text-base">
+            <h4 className="font-bold text-white mb-2 uppercase text-xs tracking-widest font-mono">Mission Statement</h4>
             <p>
-              I am going to aim for B2B and use AI agents heavily to solve deep workflow problems. At the moment, I don't have a rigid, step-by-step master plan for it — I am experimenting, moving fast, and building practical systems that businesses actually want to pay for.
+              Targeting B2B SaaS with AI-native products that solve deep workflow problems. Developing enterprise-grade tools with unparalleled developer experience.
             </p>
           </div>
 
-          <div className="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-lg">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 24 24" className="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                </svg>
-              </div>
-              <div>
-                <h4 className="font-bold text-white text-lg">Current Build</h4>
-                <p className="text-white/70 mt-1">Foundational AI-driven security scanners and testing B2B approaches.</p>
-              </div>
-            </div>
+          <div className="bg-[#050505] p-5 rounded-xl border border-white/5 shadow-inner">
+            <h4 className="font-bold text-white uppercase text-xs tracking-widest font-mono mb-2">Primary Initiative</h4>
+            <p className="text-white/70">AI-powered code security scanner currently in private beta, establishing early stage B2B validation frameworks.</p>
           </div>
 
           <div>
-            <h4 className="font-bold text-white mb-3">Startup Programs</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-white mb-4 uppercase text-xs tracking-widest font-mono">Infrastructure Support</h4>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {portfolioData.company.programs.map(prog => (
-                <li key={prog} className="flex items-center gap-2 text-white/80">
-                  <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                <li key={prog} className="flex items-center gap-3 text-white/70 bg-white/5 px-3 py-2 rounded-lg border border-white/5 font-mono text-xs shadow-sm">
+                   <svg viewBox="0 0 24 24" className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                     <polyline points="20 6 9 17 4 12"></polyline>
+                   </svg>
                   {prog}
                 </li>
               ))}
@@ -605,7 +592,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-lg relative h-[210px] overflow-hidden">
+            <div className="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-lg relative overflow-hidden">
               <div className="absolute right-0 bottom-0 -mr-6 -mb-6 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
               <h4 className="text-sm tracking-widest uppercase font-bold text-white/50 mb-4 flex items-center gap-2">
                 <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
@@ -613,13 +600,13 @@ export default function App() {
                   <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                   <line x1="12" y1="22.08" x2="12" y2="12"></line>
                 </svg>
-                Intelligence Layer
+                Model Providers
               </h4>
-              <div className="flex flex-col gap-2 relative z-10">
+              <div className="flex flex-wrap gap-2 relative z-10">
                 {portfolioData.aiWorkflow.cloudModels.map(m => (
-                  <div key={m} className="flex items-center gap-3 py-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></div>
-                    <span className="text-sm font-semibold text-white/90">{m}</span>
+                  <div key={m} className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></div>
+                    <span className="text-xs font-semibold text-white/90">{m}</span>
                   </div>
                 ))}
               </div>
@@ -657,14 +644,12 @@ export default function App() {
                   <polyline points="2 17 12 22 22 17"></polyline>
                   <polyline points="2 12 12 17 22 12"></polyline>
                 </svg>
-                Context Engineering
+                Agentic Workflow Design
               </h4>
               <div className="space-y-3">
                 {portfolioData.aiWorkflow.contextEngineering.map(item => (
-                  <div key={item} className="flex items-start gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
-                    <div className="w-5 h-5 mt-0.5 shrink-0 rounded bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
-                      <svg viewBox="0 0 24 24" className="w-3 h-3" stroke="currentColor" strokeWidth="3" fill="none"><path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </div>
+                  <div key={item} className="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
+                    <div className="w-1.5 h-1.5 shrink-0 rounded-full bg-indigo-400 shadow-[0_0_6px_rgba(129,140,248,0.6)]"></div>
                     <span className="text-xs sm:text-sm font-medium text-white/80 leading-relaxed">{item}</span>
                   </div>
                 ))}
@@ -675,44 +660,44 @@ export default function App() {
         </div>
       </Modal>
 
-      {/* Music Production — with arrow navigation */}
-      <Modal isOpen={activeModal === 'music'} onClose={() => setActiveModal(null)} title="Music Production" maxWidth="max-w-4xl">
-        <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mb-8">
-          <div className="w-32 h-32 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.3)] shrink-0 animate-[spin_10s_linear_infinite]">
-            <Music className="w-12 h-12 text-white animate-[spin_10s_linear_infinite_reverse]" />
-          </div>
-          <div>
-            <p className="text-xl text-white/80 leading-relaxed">{portfolioData.music.details}</p>
-          </div>
-        </div>
-        
-        <h4 className="font-bold text-2xl text-white mb-6">Original Tracks</h4>
-        <div className="relative">
-          <ScrollArrows scrollRef={musicScrollRef} />
-          <div
-            ref={musicScrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory hide-scrollbar"
-          >
-            {portfolioData.music.tracks.map((track, i) => (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.4, ease: EASE_OUT_QUART }}
-                key={track.name} 
-                className="min-w-[200px] sm:min-w-[250px] snap-center shrink-0 bg-white/5 p-4 rounded-3xl border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all group cursor-pointer"
-              >
-                <div className="w-full aspect-square rounded-2xl overflow-hidden mb-4 relative">
-                  <img src={track.image} alt={track.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
-                      <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-white border-b-[6px] border-b-transparent ml-1"></div>
-                    </div>
-                  </div>
+      {/* Hobbies / Culture Category */}
+      <Modal isOpen={activeModal === 'hobbies'} onClose={() => setActiveModal(null)} title="Diversions" maxWidth="max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          
+          {/* Music Panel */}
+          <div className="space-y-6">
+            <div className="border-b border-white/10 pb-4">
+               <h4 className="text-xl font-bold tracking-tight text-white mb-2 uppercase">Music Production</h4>
+               <p className="text-white/60 text-sm leading-relaxed">{portfolioData.hobbies.music.details}</p>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-3">
+              {portfolioData.hobbies.music.tracks.map((track, i) => (
+                <div key={track.name} className="group relative overflow-hidden rounded-xl bg-white/5 aspect-square border border-white/5">
+                   <img src={track.image} alt={track.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                     <p className="text-xs font-bold text-white truncate">{track.name}</p>
+                   </div>
                 </div>
-                <h5 className="font-bold text-lg text-center group-hover:text-emerald-400 transition-colors">{track.name}</h5>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
+
+          {/* Reading & Culture Panel */}
+          <div className="space-y-6">
+            <div className="border-b border-white/10 pb-4">
+               <h4 className="text-xl font-bold tracking-tight text-white mb-2 uppercase">Anime & Manga</h4>
+               <p className="text-white/60 text-sm leading-relaxed">{portfolioData.hobbies.reading.details}</p>
+            </div>
+            
+            <div className="flex flex-col items-center justify-center h-48 border border-white/5 rounded-xl bg-white/[0.02] relative overflow-hidden group">
+               <svg viewBox="0 0 24 24" className="w-16 h-16 text-white/20 group-hover:text-white/80 transition-colors drop-shadow-xl" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+               </svg>
+            </div>
+          </div>
+
         </div>
       </Modal>
 
