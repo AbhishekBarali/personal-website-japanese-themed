@@ -2,12 +2,10 @@ import { useEffect, useRef } from 'react';
 
 // --- THE CALLIGRAPHY SILK ---
 // A highly-tuned, elegant spring-chain physics ribbon that trails the cursor.
-// Minimalist, deeply satisfying, and causes zero visual clutter.
-
-const POINTS = 70; // Length of the silk ribbon
-const TENSION = 0.55; // Fluidity of the connection
-const DAMPING = 0.45; // Friction (feels like floating in water)
-const GRAVITY = 0.4; // Very gentle downward pull so the ribbon naturally dangles
+const POINTS = 100; // Optimal length for deep smoothness
+const TENSION = 0.5; // High responsiveness
+const DAMPING = 0.4; // Strong friction to prevent chaos/rubber-banding
+const GRAVITY = 0.2; // Gentle drifting weight
 
 interface Segment {
   x: number;
@@ -162,8 +160,8 @@ export default function InteractiveBackground() {
       const drawRibbon = (ribbon: Segment[], r: number, g: number, b: number, maxThickness: number) => {
         if (!started) return;
         
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
+        ctx.lineCap = 'butt'; // Remove overlapping round caps that create visible dots
+        ctx.lineJoin = 'miter';
 
         // Draw piecewise with decreasing opacity and thickness for tapering effect
         for (let i = 0; i < POINTS - 1; i++) {
@@ -192,10 +190,10 @@ export default function InteractiveBackground() {
       };
 
       // Draw shadow/ink ribbon first (underneath)
-      drawRibbon(ribbonShadow, 0, 0, 0, 30);
+      drawRibbon(ribbonShadow, 5, 5, 5, 30);
       
-      // Draw primary crimson ribbon (on top)
-      drawRibbon(ribbonPrimary, 204, 0, 0, 20); // #cc0000
+      // Draw primary glowing amber/pearl ribbon (on top) - deeply satisfying ASMR feel
+      drawRibbon(ribbonPrimary, 252, 211, 77, 18); // #fcd34d
 
       // --- ELEGANT DOT CURSOR (Hardware) ---
       // We rely on the global CSS hardware cursor so we don't draw it on the background canvas anymore
@@ -215,7 +213,7 @@ export default function InteractiveBackground() {
 
   return (
     <>
-      <style>{`* { cursor: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='4' fill='%23ffffff' filter='blur(1px)' /%3E%3Ccircle cx='6' cy='6' r='2' fill='%23ff3333' /%3E%3C/svg%3E") 6 6, auto !important; }`}</style>
+      <style>{`* { cursor: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='4' fill='%23ffffff' filter='blur(1px)' /%3E%3Ccircle cx='6' cy='6' r='2' fill='%23fcd34d' /%3E%3C/svg%3E") 6 6, auto !important; }`}</style>
       
       <div className="fixed inset-0 z-0 overflow-hidden bg-[#110f0e] pointer-events-none">
         {/* Old parchment texture via SVG noise */}
@@ -231,8 +229,8 @@ export default function InteractiveBackground() {
         <div className="absolute -bottom-[10%] -right-[10%] w-[60vw] h-[50vh] bg-[#080708] rounded-[50%_50%_30%_70%/50%_40%_60%_50%] blur-[60px] opacity-90 animate-[spin_40s_linear_infinite_reverse]" />
         <div className="absolute top-[20%] left-[10%] w-[40vw] h-[30vh] bg-[#1a1412] rounded-[30%_70%_70%_30%/30%_30%_70%_70%] blur-[50px] opacity-40 animate-[spin_25s_linear_infinite]" />
 
-        {/* Soft Ambient Crimson Gradient (Replaces the bright sun/circle) */}
-        <div className="absolute -top-[20%] -right-[10%] w-[70vw] max-w-[900px] aspect-square bg-[#4a0000] rounded-full mix-blend-screen opacity-20 blur-[150px]" />
+        {/* Soft Ambient Golden/Amber Gradient */}
+        <div className="absolute -top-[20%] -right-[10%] w-[70vw] max-w-[900px] aspect-square bg-[#4a3000] rounded-full mix-blend-screen opacity-20 blur-[150px]" />
 
         {/* High-Performance Canvas for Calligraphy Silk Ribbon (Background) */}
         <canvas ref={canvasRef} className="absolute inset-0 z-10 opacity-100 pointer-events-none" />

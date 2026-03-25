@@ -13,7 +13,7 @@ export default function PortfolioEyes({ size = 48, className = '' }: PortfolioEy
   useEffect(() => {
     const maxMove = size * 0.2;
 
-    const onMouseMove = (e: MouseEvent) => {
+    const onPointerMove = (e: PointerEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
@@ -37,8 +37,8 @@ export default function PortfolioEyes({ size = 48, className = '' }: PortfolioEy
       }
     };
 
-    window.addEventListener('mousemove', onMouseMove);
-    return () => window.removeEventListener('mousemove', onMouseMove);
+    window.addEventListener('pointermove', onPointerMove);
+    return () => window.removeEventListener('pointermove', onPointerMove);
   }, [size]);
 
   const eyeSize = size;
