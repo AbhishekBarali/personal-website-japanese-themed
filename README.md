@@ -1,20 +1,49 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🎌 Kaiki - Japanese-Themed Personal Portfolio
 
-# Run and deploy your AI Studio app
+A visually stunning, performance-optimized personal portfolio featuring a Japanese-inspired aesthetic. This project showcases interactive elements, smooth animations, and a responsive design tailored for a modern web experience.
 
-This contains everything you need to run your app locally.
+## ✨ Features
 
-View your app in AI Studio: https://ai.studio/apps/3995f355-c09a-4004-b855-e377f68848cf
+- **Interactive Canvas Background**: A beautiful, performant particle mesh canvas inspired by cherry blossoms.
+- **Draggable UI Elements**: Engaging draggable grid boxes with smart click-vs-drag detection.
+- **Smooth Navigation**: Custom arrow navigation for project and music carousels.
+- **Custom Cursor**: A lightweight, custom-designed cursor that complements the theme.
+- **Responsive Design**: Flawless experience across desktop, tablet, and mobile devices.
 
-## Run Locally
+## 🚀 Quick Start
 
-**Prerequisites:**  Node.js
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/AbhishekBarali/personal-website-japanese-themed.git
+   ```
 
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
+
+## 🛠️ Tech Stack
+
+- **Framework**: React / Vite
+- **Styling**: Tailwind CSS & Custom CSS
+- **Animations**: Framer Motion / Custom Canvas API
+- **Icons**: Lucide React
+
+## 👤 Author
+
+**Abhishek Barali**
+- Founder of Kaiki
+- CS student at St. Xavier's College
+
+---
+*Simplicity is the ultimate sophistication.*
