@@ -21,11 +21,11 @@ const portfolioData = {
     programs: ["Microsoft Azure Startup Credits", "Alibaba Cloud AI Catalyst", "NVIDIA Inception"]
   },
   projects: [
-    { name: "Barali Chat", desc: "Full-stack AI chat platform with multi-provider support.", link: "https://barali-chat.vercel.app", image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600&auto=format&fit=crop" },
-    { name: "KAIKI Shikigami", desc: "AI agent system for business opportunity discovery.", link: "https://github.com/AbhishekBarali/KAIKI-Shikigami", image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop" },
-    { name: "Manhwa Finder", desc: "AI Recommendation Engine for manhwa.", link: "https://github.com/AbhishekBarali/manhwa-reccomender", image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=600&auto=format&fit=crop" },
-    { name: "AI Playlist Curator", desc: "Gemini-powered CLI tool to reorganize YouTube Music.", link: "https://github.com/AbhishekBarali/AI_Playlist_Curator", image: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?q=80&w=600&auto=format&fit=crop" },
-    { name: "Barali Life", desc: "Personal Life OS with dynamic diet engine and gym split.", link: "https://github.com/AbhishekBarali/Barali-Life", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=600&auto=format&fit=crop" }
+    { name: "Kaiki.dev", desc: "Enterprise-grade B2B Security & AI discovery platform.", link: "https://kaiki.dev", image: "/projects/kaiki.png", layout: "horizontal" },
+    { name: "Barali Chat", desc: "Full-stack AI chat platform with multi-provider support.", link: "https://barali.tech", image: "/projects/barali-chat.png", layout: "featured" },
+    { name: "Barali Life", desc: "Personal Life OS with dynamic diet engine and gym split.", link: "https://github.com/AbhishekBarali/Barali-Life", image: "/projects/barali-life.png", layout: "portrait" },
+    { name: "KAIKI Shikigami", desc: "AI agent system for business opportunity discovery.", link: "https://github.com/AbhishekBarali/KAIKI-Shikigami", image: "/projects/shikigami.png", layout: "horizontal" },
+    { name: "Manhwa Recommender", desc: "AI Recommendation Engine for manhwa.", link: "https://github.com/AbhishekBarali/manhwa-reccomender", image: "/projects/manhwa.png", layout: "wide" }
   ],
   skills: {
     Frontend: ['React', 'Next.js', 'Vite', 'Tailwind CSS'],
@@ -199,6 +199,7 @@ const itemVariants = {
 
 export default function App() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [expandedProject, setExpandedProject] = useState<string | null>(null);
   const constraintsRef = useRef<HTMLDivElement>(null);
   const projectsScrollRef = useRef<HTMLDivElement>(null);
   const musicScrollRef = useRef<HTMLDivElement>(null);
@@ -587,7 +588,7 @@ export default function App() {
             <div className="flex items-center gap-5 sm:gap-6">
               <div className="flex flex-col justify-center">
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight flex items-center gap-3">
-                  {portfolioData.company.full}
+                  {portfolioData.company.name}
                 </h3>
                  <p className="text-amber-400/80 font-bold text-[10px] sm:text-xs tracking-widest mt-1 uppercase">
                    {portfolioData.company.status}
@@ -655,37 +656,108 @@ export default function App() {
         </div>
       </Modal>
 
-      {/* Project Showcase — with arrow navigation */}
-      <Modal isOpen={activeModal === 'projects'} onClose={() => setActiveModal(null)} title="Project Showcase" maxWidth="max-w-5xl">
-        <div className="relative">
-          <ScrollArrows scrollRef={projectsScrollRef} />
-          <div
-            ref={projectsScrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 pt-4 snap-x snap-mandatory hide-scrollbar"
-          >
-            {portfolioData.projects.map((project, i) => (
-              <motion.a 
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.4, ease: EASE_OUT_QUART }}
+      {/* Project Showcase — Clean Accordion */}
+      <Modal isOpen={activeModal === 'projects'} onClose={() => setActiveModal(null)} title="Projects Craft" maxWidth="max-w-4xl">
+        <div className="flex flex-col gap-2 pt-6 pb-12 w-full">
+          {portfolioData.projects.map((project, i) => {
+            const isPortrait = project.layout === 'portrait';
+            const isExpanded = expandedProject === project.name;
+
+            return (
+              <div 
                 key={project.name} 
-                href={project.link}
-                target="_blank"
-                rel="noreferrer"
-                className="min-w-[220px] sm:min-w-[260px] snap-center shrink-0 bg-white/5 p-4 rounded-3xl border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all group overflow-hidden flex flex-col"
+                className={`overflow-hidden transition-all duration-500 rounded-[2rem] border ${isExpanded ? 'bg-white/5 border-white/20 my-4 shadow-2xl' : 'bg-transparent border-transparent hover:bg-white/5'}`}
               >
-                <div className="w-full aspect-square rounded-2xl overflow-hidden mb-4 relative">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
-                  <img src={project.image} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                {/* Header Row (Clickable) */}
+                <div 
+                  onClick={() => setExpandedProject(isExpanded ? null : project.name)}
+                  className="flex items-center justify-between p-6 cursor-pointer select-none group"
+                >
+                  <div className="flex items-center gap-6">
+                    <div className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-white/5 text-white/30 text-xs font-bold font-mono group-hover:text-amber-400 group-hover:bg-amber-400/10 transition-colors">
+                      0{i + 1}
+                    </div>
+                    <h4 className={`font-black tracking-tight transition-all duration-500 ${isExpanded ? 'text-3xl md:text-5xl text-white' : 'text-2xl md:text-3xl text-white/80 group-hover:text-white'}`}>
+                      {project.name}
+                    </h4>
+                  </div>
+                  
+                  <div className={`w-12 h-12 rounded-full border border-white/10 flex items-center justify-center transition-all duration-500 ${isExpanded ? 'bg-white text-black rotate-45' : 'bg-white/5 text-white/50 group-hover:bg-white/10 group-hover:text-white'}`}>
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </div>
                 </div>
-                <div className="flex justify-between items-start mb-1">
-                  <h4 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">{project.name}</h4>
-                  <ExternalLink className="w-4 h-4 text-white/30 group-hover:text-white transition-colors shrink-0 mt-1" />
-                </div>
-                <p className="text-sm text-white/60 leading-relaxed">{project.desc}</p>
-              </motion.a>
-            ))}
-          </div>
+
+                {/* Expanded Content */}
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.5, ease: EASE_OUT_QUART }}
+                      className="px-6 pb-6"
+                    >
+                      <div className={`flex flex-col md:flex-row gap-8 items-stretch mt-4 mb-2`}>
+                        {/* Text & Meta */}
+                        <div className="flex-1 flex flex-col justify-between order-2 md:order-1">
+                          <div>
+                            <div className="flex items-center gap-3 mb-4">
+                               <div className="w-1.5 h-1.5 rounded-full bg-amber-400/80 shadow-[0_0_8px_rgba(251,191,36,0.8)] animate-pulse"></div>
+                               <p className="text-[10px] sm:text-xs font-bold text-white/50 tracking-[0.2em] uppercase">SHIPPED</p>
+                            </div>
+                            <p className="text-lg md:text-xl text-white/70 leading-relaxed font-medium">
+                              {project.desc}
+                            </p>
+                          </div>
+                          
+                          <div className="mt-8">
+                            <a 
+                              href={project.link} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#0a0a0a] border border-white/10 hover:border-white/30 hover:bg-white hover:text-black transition-all text-sm font-bold tracking-tight text-white group/btn"
+                            >
+                              Visit Live 
+                              <ArrowUpRight className="w-4 h-4 text-white/50 group-hover/btn:text-black transition-colors" strokeWidth={2.5} />
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Image Preview */}
+                        <div className={`w-full ${isPortrait ? 'md:w-1/3' : 'md:w-[55%]'} shrink-0 relative order-1 md:order-2`}>
+                          <a 
+                             href={project.link} 
+                             target="_blank" 
+                             rel="noreferrer" 
+                             onClick={(e) => e.stopPropagation()}
+                             className="block relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] group/img hover:border-white/30 transition-all shadow-xl"
+                          >
+                             <div className={`w-full ${isPortrait ? 'aspect-[9/16]' : 'aspect-[16/9]'} overflow-hidden relative bg-black`}>
+                               <div className="absolute inset-0 bg-black/10 group-hover/img:bg-transparent transition-colors z-10 pointer-events-none"></div>
+                               <img 
+                                 src={project.image} 
+                                 alt={project.name} 
+                                 className={`w-full h-full ${isPortrait ? 'object-cover' : 'object-cover object-top'} scale-100 group-hover/img:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.2,0.8,0.2,1)] opacity-80 group-hover/img:opacity-100`} 
+                               />
+                             </div>
+                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity z-20 pointer-events-none bg-black/20">
+                               <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                                  <ExternalLink className="w-5 h-5" />
+                               </div>
+                             </div>
+                          </a>
+                        </div>
+
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </Modal>
 
