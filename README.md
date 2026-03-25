@@ -7,7 +7,7 @@ A visually stunning, performance-optimized personal portfolio featuring a Japane
 - **Interactive Canvas Background**: A beautiful, performant particle mesh canvas inspired by cherry blossoms.
 - **Draggable UI Elements**: Engaging draggable grid boxes with smart click-vs-drag detection.
 - **Smooth Navigation**: Custom arrow navigation for project and music carousels.
-- **Custom Cursor**: A lightweight, custom-designed cursor that complements the theme.
+- **Silk Cursor**: A fluid, physics-based silk ribbon cursor that dynamically trails the mouse, elevating the interactive experience.
 - **Responsive Design**: Flawless experience across desktop, tablet, and mobile devices.
 
 ## 🚀 Quick Start
