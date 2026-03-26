@@ -22,6 +22,9 @@ export function RobotAvatar({ size = 96, className = '' }: RobotAvatarProps) {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      // Ignore touch devices completely for tracking to boost scroll perf
+      if (window.matchMedia && window.matchMedia("(hover: none)").matches) return;
+
       // Just store the timestamp — no state update, no re-render
       lastMouseTimeRef.current = Date.now();
 
@@ -63,6 +66,8 @@ export function RobotAvatar({ size = 96, className = '' }: RobotAvatarProps) {
     window.addEventListener('mousemove', handleMouseMove);
 
     const idleCheck = setInterval(() => {
+      if (window.matchMedia && window.matchMedia("(hover: none)").matches) return; // Don't sleep loop dynamically on mobile
+
       if (Date.now() - lastMouseTimeRef.current > 6000 && !isHovered) {
         setExpression(prev => (prev !== 'happy' && prev !== 'impressed') ? 'sleepy' : prev);
       }

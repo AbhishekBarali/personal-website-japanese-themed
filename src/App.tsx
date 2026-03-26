@@ -179,22 +179,26 @@ function DraggableBox({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768 || window.matchMedia("(hover: none)").matches);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const dragProps = isMobile ? {} : {
+    drag: true,
+    dragConstraints: { top: 0, left: 0, right: 0, bottom: 0 },
+    dragElastic: 0.8,
+    dragTransition: { bounceStiffness: 300, bounceDamping: 20 },
+    whileDrag: { scale: 1.05, zIndex: 100, boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }
+  };
+
   return (
     <motion.div
       variants={variants}
-      drag={!isMobile}
-      dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-      dragElastic={0.8}
-      dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
-      whileDrag={!isMobile ? { scale: 1.05, zIndex: 100, boxShadow: '0 20px 60px rgba(0,0,0,0.5)' } : undefined}
       onClick={onClick}
       className={className}
+      {...dragProps}
     >
       {children}
     </motion.div>
