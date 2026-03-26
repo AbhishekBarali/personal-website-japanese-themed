@@ -1,7 +1,7 @@
 export default function InteractiveBackground() {
   return (
     <>
-      <style>{`* { cursor: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='4' fill='%23ffffff' filter='blur(1px)' /%3E%3Ccircle cx='6' cy='6' r='2' fill='%23fcd34d' /%3E%3C/svg%3E") 6 6, auto !important; }`}</style>
+      <style>{`@media (min-width: 768px) { * { cursor: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='4' fill='%23ffffff' filter='blur(1px)' /%3E%3Ccircle cx='6' cy='6' r='2' fill='%23fcd34d' /%3E%3C/svg%3E") 6 6, auto !important; } }`}</style>
       
       <div className="fixed inset-0 z-0 overflow-hidden bg-[#110f0e] pointer-events-none">
         {/* Simple static background fallback for mobile */}
