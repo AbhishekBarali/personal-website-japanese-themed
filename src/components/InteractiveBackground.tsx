@@ -24,7 +24,7 @@ export default function InteractiveBackground() {
         <div className="absolute -top-[20%] -right-[10%] w-[70vw] max-w-[900px] aspect-square bg-[#4a3000] rounded-full hidden md:block mix-blend-screen opacity-20 blur-[150px]" />
 
         {/* Intense Vignette Overlay for Moody Lighting */}
-        <div className="absolute inset-0 z-20 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, #000000 130%)', opacity: 0.85 }} />
+        <div className="absolute inset-0 z-20 pointer-events-none hidden md:block" style={{ background: 'radial-gradient(circle at center, transparent 30%, #000000 130%)', opacity: 0.85 }} />
       </div>
     </>
   );
