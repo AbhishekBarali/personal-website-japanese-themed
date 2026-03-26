@@ -86,16 +86,16 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = "max-w-2xl" }: any
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: EASE_OUT_QUART }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/90 md:bg-black/60 backdrop-blur-xl z-50"
+          className="fixed inset-0 bg-black/90 md:bg-black/60 backdrop-blur-none md:backdrop-blur-xl z-50"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.4, ease: EASE_OUT_QUART }}
-          className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full ${maxWidth} max-h-[85vh] flex flex-col bg-[#0a0a0a] md:bg-[#0a0a0a]/90 backdrop-blur-2xl border border-white/10 rounded-3xl z-50 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden`}
+          className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full ${maxWidth} max-h-[85vh] flex flex-col bg-[#0a0a0a] md:bg-[#0a0a0a]/90 backdrop-blur-none md:backdrop-blur-2xl border border-white/10 rounded-3xl z-50 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden`}
         >
-          <div className="flex justify-between items-center shrink-0 z-[100] bg-[#0a0a0a] md:bg-[#0a0a0a]/80 backdrop-blur-md py-4 px-6 md:px-8 border-b border-white/5">
+          <div className="flex justify-between items-center shrink-0 z-[100] bg-[#0a0a0a] md:bg-[#0a0a0a]/80 backdrop-blur-none md:backdrop-blur-md py-4 px-6 md:px-8 border-b border-white/5">
             <h2 className="text-3xl font-black">{title}</h2>
             <button onClick={onClose} className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors">
               <X className="w-6 h-6" />
@@ -145,7 +145,7 @@ function ScrollArrows({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement
         animate={{ opacity: canScrollLeft ? 1 : 0 }}
         transition={{ duration: 0.2 }}
         onClick={(e) => { e.stopPropagation(); scroll('left'); }}
-        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/15 flex items-center justify-center hover:bg-white/20 transition-colors"
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-none md:backdrop-blur-md border border-white/15 flex items-center justify-center hover:bg-white/20 transition-colors"
         style={{ pointerEvents: canScrollLeft ? 'auto' : 'none' }}
       >
         <ChevronLeft className="w-5 h-5 text-white" />
@@ -156,7 +156,7 @@ function ScrollArrows({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement
         animate={{ opacity: canScrollRight ? 1 : 0 }}
         transition={{ duration: 0.2 }}
         onClick={(e) => { e.stopPropagation(); scroll('right'); }}
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/15 flex items-center justify-center hover:bg-white/20 transition-colors"
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-none md:backdrop-blur-md border border-white/15 flex items-center justify-center hover:bg-white/20 transition-colors"
         style={{ pointerEvents: canScrollRight ? 'auto' : 'none' }}
       >
         <ChevronRight className="w-5 h-5 text-white" />
@@ -240,7 +240,7 @@ export default function App() {
         <DraggableBox
           variants={itemVariants}
           onClick={() => setActiveModal('profile')}
-          className="md:col-span-2 md:row-span-1 bg-[#050505]/60 backdrop-blur-xl rounded-3xl p-6 border border-white/5 flex flex-col justify-between relative overflow-hidden shadow-2xl group cursor-pointer hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
+          className="md:col-span-2 md:row-span-1 bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-3xl p-6 border border-white/5 flex flex-col justify-between relative overflow-hidden shadow-2xl group cursor-pointer hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <div className="flex justify-between items-start relative z-10">
@@ -275,7 +275,7 @@ export default function App() {
         <DraggableBox
           variants={itemVariants}
           onClick={() => setActiveModal('stack')}
-          className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-xl rounded-3xl p-5 border border-white/5 flex flex-col justify-between overflow-hidden shadow-2xl cursor-pointer group hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
+          className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-3xl p-5 border border-white/5 flex flex-col justify-between overflow-hidden shadow-2xl cursor-pointer group hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-teal-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <div className="flex justify-between items-start relative z-10">
@@ -305,21 +305,21 @@ export default function App() {
           className="md:col-span-1 md:row-span-1 flex flex-col gap-2 z-10 hover:z-50"
         >
           <div className="flex items-center justify-center h-1/2 gap-2">
-            <div className="flex items-center justify-center w-1/2 h-full font-black text-2xl leading-none tracking-tighter bg-[#050505]/60 backdrop-blur-xl rounded-2xl border border-white/5">
+            <div className="flex items-center justify-center w-1/2 h-full font-black text-2xl leading-none tracking-tighter bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-2xl border border-white/5">
               LIN<br/>KS.
             </div>
-            <a href="https://github.com/AbhishekBarali" title="GitHub" target="_blank" rel="noreferrer" className="w-1/2 h-full bg-[#050505]/60 backdrop-blur-xl rounded-2xl border border-white/5 flex items-center justify-center hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all cursor-pointer shadow-lg group">
+            <a href="https://github.com/AbhishekBarali" title="GitHub" target="_blank" rel="noreferrer" className="w-1/2 h-full bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-2xl border border-white/5 flex items-center justify-center hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all cursor-pointer shadow-lg group">
               <Github className="w-7 h-7 text-white/70 group-hover:text-white transition-colors" />
             </a>
           </div>
           <div className="flex items-center justify-center h-1/2 gap-2">
-            <a href="mailto:barali@kaiki.dev" title="Email" className="w-1/3 h-full bg-[#050505]/60 backdrop-blur-xl rounded-2xl border border-white/5 flex items-center justify-center hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all cursor-pointer shadow-lg group">
+            <a href="mailto:barali@kaiki.dev" title="Email" className="w-1/3 h-full bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-2xl border border-white/5 flex items-center justify-center hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all cursor-pointer shadow-lg group">
               <Mail className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
             </a>
-            <a href="https://www.linkedin.com/in/abhishek-barali-8a1a2a1a6/" title="LinkedIn" target="_blank" rel="noreferrer" className="w-1/3 h-full bg-[#050505]/60 backdrop-blur-xl rounded-2xl border border-white/5 flex items-center justify-center hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all cursor-pointer shadow-lg group">
+            <a href="https://www.linkedin.com/in/abhishek-barali-8a1a2a1a6/" title="LinkedIn" target="_blank" rel="noreferrer" className="w-1/3 h-full bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-2xl border border-white/5 flex items-center justify-center hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all cursor-pointer shadow-lg group">
               <Linkedin className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
             </a>
-            <a href="https://kaiki.dev" title="KAIKI" target="_blank" rel="noreferrer" className="w-1/3 h-full bg-[#050505]/60 backdrop-blur-xl rounded-2xl border border-white/5 flex items-center justify-center hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all cursor-pointer shadow-lg group">
+            <a href="https://kaiki.dev" title="KAIKI" target="_blank" rel="noreferrer" className="w-1/3 h-full bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-2xl border border-white/5 flex items-center justify-center hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all cursor-pointer shadow-lg group">
               <Globe className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
             </a>
           </div>
@@ -329,11 +329,11 @@ export default function App() {
         <DraggableBox
           variants={itemVariants}
           onClick={() => setActiveModal('projects')}
-          className="md:col-span-2 md:row-span-2 bg-[#0a0e14]/80 backdrop-blur-xl rounded-3xl p-6 border border-white/10 relative overflow-hidden group cursor-pointer flex flex-col justify-between shadow-[0_0_40px_rgba(0,0,0,0.5)] hover:shadow-[0_0_50px_rgba(195,165,100,0.12)] hover:border-white/20 hover:bg-[#0a0e14]/90 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
+          className="md:col-span-2 md:row-span-2 bg-[#0a0e14]/80 backdrop-blur-none md:backdrop-blur-xl rounded-3xl p-6 border border-white/10 relative overflow-hidden group cursor-pointer flex flex-col justify-between shadow-[0_0_40px_rgba(0,0,0,0.5)] hover:shadow-[0_0_50px_rgba(195,165,100,0.12)] hover:border-white/20 hover:bg-[#0a0e14]/90 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] border border-white/5 rounded-full animate-[spin_20s_linear_infinite]"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] border border-white/5 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] border border-white/5 rounded-full md:animate-[spin_20s_linear_infinite]"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] border border-white/5 rounded-full md:animate-[spin_15s_linear_infinite_reverse]"></div>
           </div>
           
           <div className="relative z-10 flex justify-between items-start">
@@ -342,15 +342,15 @@ export default function App() {
               <h2 className="text-5xl font-black leading-none tracking-tight text-white mb-2">PROJECTS</h2>
               <p className="text-sm font-medium text-white/50 mt-1">Full stack · AI · Open source</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md group-hover:bg-white/20 transition-colors">
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-none md:backdrop-blur-md group-hover:bg-white/20 transition-colors">
               <ArrowUpRight className="w-6 h-6 text-white" />
             </div>
           </div>
           
           <div className="relative z-10 flex justify-between items-end">
             <div className="flex gap-2">
-              <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-bold text-white backdrop-blur-md border border-white/5">5 Shipped</span>
-              <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-bold text-white backdrop-blur-md border border-white/5">AI Agents</span>
+              <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-bold text-white backdrop-blur-none md:backdrop-blur-md border border-white/5">5 Shipped</span>
+              <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-bold text-white backdrop-blur-none md:backdrop-blur-md border border-white/5">AI Agents</span>
             </div>
             <p className="text-4xl font-black opacity-30 text-white">工<br/>芸</p>
           </div>
@@ -360,7 +360,7 @@ export default function App() {
         <DraggableBox
           variants={itemVariants}
           onClick={() => setActiveModal('company')}
-          className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-xl rounded-3xl p-5 border border-white/5 relative overflow-hidden group cursor-pointer shadow-2xl hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
+          className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-3xl p-5 border border-white/5 relative overflow-hidden group cursor-pointer shadow-2xl hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
           <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 blur-3xl rounded-full pointer-events-none group-hover:bg-white/10 transition-all duration-700"></div>
           <div className="relative z-10 h-full flex flex-col justify-between">
@@ -371,7 +371,7 @@ export default function App() {
                   <p className="text-[10px] font-bold text-white/40 tracking-widest uppercase mt-1">FOUNDER & CEO</p>
                 </div>
               </div>
-              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center backdrop-blur-md group-hover:bg-white/20 transition-colors">
+              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center backdrop-blur-none md:backdrop-blur-md group-hover:bg-white/20 transition-colors">
                 <ArrowUpRight className="w-4 h-4 text-white" />
               </div>
             </div>
@@ -389,7 +389,7 @@ export default function App() {
         <DraggableBox
           variants={itemVariants}
           onClick={() => setActiveModal('ai')}
-          className="md:col-span-2 md:row-span-1 bg-[#050505]/60 backdrop-blur-xl rounded-3xl p-6 border border-white/5 flex flex-col justify-between relative overflow-hidden shadow-2xl group cursor-pointer hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
+          className="md:col-span-2 md:row-span-1 bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-3xl p-6 border border-white/5 flex flex-col justify-between relative overflow-hidden shadow-2xl group cursor-pointer hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none group-hover:bg-indigo-500/10 transition-colors duration-700"></div>
@@ -398,8 +398,8 @@ export default function App() {
             <div className="flex items-center gap-4">
               <div className="relative w-10 h-10 shrink-0">
                 <svg viewBox="0 0 100 100" className="w-full h-full text-indigo-400 group-hover:text-indigo-300 transition-colors drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]">
-                  <path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z" fill="none" stroke="currentColor" strokeWidth="3" className="animate-[spin_20s_linear_infinite]" />
-                  <path d="M50 20 L80 35 L80 65 L50 80 L20 65 L20 35 Z" fill="none" stroke="currentColor" strokeWidth="2" strokeOpacity="0.5" className="animate-[spin_15s_linear_infinite_reverse]" />
+                  <path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z" fill="none" stroke="currentColor" strokeWidth="3" className="md:animate-[spin_20s_linear_infinite]" />
+                  <path d="M50 20 L80 35 L80 65 L50 80 L20 65 L20 35 Z" fill="none" stroke="currentColor" strokeWidth="2" strokeOpacity="0.5" className="md:animate-[spin_15s_linear_infinite_reverse]" />
                   <circle cx="50" cy="50" r="8" fill="currentColor" className="animate-pulse" />
                   <line x1="50" y1="10" x2="50" y2="20" stroke="currentColor" strokeWidth="2" />
                   <line x1="15" y1="30" x2="25" y2="35" stroke="currentColor" strokeWidth="2" />
@@ -436,7 +436,7 @@ export default function App() {
         <DraggableBox
           variants={itemVariants}
           onClick={() => setActiveModal('hobbies')}
-          className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-xl rounded-3xl p-5 border border-white/5 flex flex-col justify-between relative overflow-hidden shadow-2xl group cursor-pointer hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
+          className="md:col-span-1 md:row-span-1 bg-[#050505]/60 backdrop-blur-none md:backdrop-blur-xl rounded-3xl p-5 border border-white/5 flex flex-col justify-between relative overflow-hidden shadow-2xl group cursor-pointer hover:border-white/20 hover:bg-[#050505]/80 transition-all z-10 hover:z-50 hover:-translate-y-0.5"
         >
           {/* Subtle minimal collage */}
           <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px] opacity-20 filter grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-500 pointer-events-none mix-blend-screen overflow-hidden rounded-3xl">
@@ -449,7 +449,7 @@ export default function App() {
 
           <div className="flex justify-between items-start relative z-10">
             <h3 className="text-2xl font-black tracking-tight text-white/95">HOBBIES</h3>
-            <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors shadow-xl text-white">
+            <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-none md:backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors shadow-xl text-white">
               <ArrowUpRight className="w-4 h-4" />
             </div>
           </div>
@@ -755,7 +755,7 @@ export default function App() {
                                />
                              </div>
                              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity z-20 pointer-events-none bg-black/20">
-                               <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                               <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-none md:backdrop-blur-md flex items-center justify-center text-white">
                                   <ExternalLink className="w-5 h-5" />
                                </div>
                              </div>
