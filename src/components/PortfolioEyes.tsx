@@ -18,9 +18,6 @@ export default function PortfolioEyes({ size = 48, className = '' }: PortfolioEy
 
     // Store coords without triggering any React work
     const onPointerMove = (e: PointerEvent) => {
-      // Ignore touch gestures to prevent scroll-blocking and jitter on mobile
-      if (e.pointerType === 'touch') return;
-
       latestX = e.clientX;
       latestY = e.clientY;
 
