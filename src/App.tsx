@@ -9,7 +9,7 @@ const portfolioData = {
   profile: {
     name: "Abhishek Barali",
     title: "Builder · AI Engineer",
-    bio: "20-year-old CS student who shipped 6 projects and founded a company. Building AI-powered products — from chat platforms to code security scanners.",
+    bio: "20-year-old CS student building KAIKI — an AI-native B2B company. From code security to chat platforms, I ship products that solve real problems.",
     location: "Kathmandu, Nepal"
   },
   company: {
@@ -18,7 +18,7 @@ const portfolioData = {
     status: "Registered company · Self-funded",
     product: "AI-powered code security scanner (Private Beta)",
     next: "AI-personalized study platform",
-    programs: ["Microsoft Azure Startup Credits", "Alibaba Cloud AI Catalyst", "NVIDIA Inception"]
+    programs: ["Microsoft Azure Startup Credits", "Alibaba Cloud AI Catalyst"]
   },
   projects: [
     { name: "Kaiki.dev", desc: "Enterprise-grade B2B Security & AI discovery platform.", link: "https://kaiki.dev", image: "/projects/kaiki.png", layout: "horizontal" },
@@ -33,7 +33,7 @@ const portfolioData = {
     Databases: ['PostgreSQL', 'SQLite', 'Convex', 'Prisma'],
     Cloud: ['AWS', 'Microsoft Azure', 'Docker', 'Vercel'],
     AI: ['LLMs & APIs', 'Local AI', 'AI Agents'],
-    Tools: ['Git', 'Streamlit', 'Playwright', 'FL Studio']
+    Tools: ['Git', 'Streamlit', 'Playwright']
   },
   aiWorkflow: {
     mcpTools: [
@@ -214,7 +214,7 @@ export default function App() {
   const musicScrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={constraintsRef} className="min-h-screen p-4 md:p-8 flex items-center justify-center relative overflow-hidden font-sans text-white">
+    <div ref={constraintsRef} className="min-h-screen p-4 md:p-8 flex flex-col items-center justify-center relative overflow-hidden font-sans text-white">
       <InteractiveBackground />
       
       {/* Background Main Grid Highlight Filter */}
@@ -349,7 +349,7 @@ export default function App() {
           
           <div className="relative z-10 flex justify-between items-end">
             <div className="flex gap-2">
-              <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-bold text-white backdrop-blur-md border border-white/5">6 Shipped</span>
+              <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-bold text-white backdrop-blur-md border border-white/5">5 Shipped</span>
               <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-bold text-white backdrop-blur-md border border-white/5">AI Agents</span>
             </div>
             <p className="text-4xl font-black opacity-30 text-white">工<br/>芸</p>
@@ -645,9 +645,9 @@ export default function App() {
 
           <div>
             <h4 className="font-black text-white mb-4 text-base flex items-center gap-2">
-              Backed By
+              Startup Programs
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {portfolioData.company.programs.map(prog => (
                 <div key={prog} className="flex flex-col justify-center text-white/80 bg-white/[0.03] px-4 py-3 rounded-xl border border-white/10 shadow-sm hover:bg-white/[0.06] hover:border-white/20 transition-all cursor-default relative overflow-hidden group">
                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-white/10 to-transparent group-hover:from-white/30 transition-colors"></div>

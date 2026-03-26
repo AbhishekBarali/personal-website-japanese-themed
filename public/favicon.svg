@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#0a0a0a"/>
+  <rect x="1" y="1" width="30" height="30" rx="6" fill="none" stroke="#222" stroke-width="1"/>
+  <!-- Bold 'A' lettermark -->
+  <path d="M16 6 L24 26 L20.5 26 L18.8 21 L13.2 21 L11.5 26 L8 26 Z M14.2 18 L17.8 18 L16 11.5 Z" fill="#fff"/>
+  <!-- Accent dot — emerald -->
+  <circle cx="25" cy="7" r="3" fill="#10b981"/>
+</svg>
