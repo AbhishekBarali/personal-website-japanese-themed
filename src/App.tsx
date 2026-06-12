@@ -97,7 +97,7 @@ const Modal = ({ isOpen, onClose, title, jp, children, maxWidth = "max-w-2xl" }:
         >
           <div className="flex justify-between items-center shrink-0 bg-sumi-900 py-4 px-6 md:px-8 border-b border-washi/8">
             <div className="flex items-baseline gap-3">
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-washi">{title}</h2>
+              <h2 className="text-2xl md:text-3xl font-black tracking-tight text-washi">{title}</h2>
               {jp && <span className="font-jp text-sm text-shu-400/80 tracking-[0.35em] hidden sm:inline">{jp}</span>}
             </div>
             <button onClick={onClose} aria-label="Close" className="p-2 bg-washi/5 hover:bg-washi/15 rounded-full transition-colors">
@@ -297,7 +297,7 @@ export default function App() {
                 <div title="online — probably debugging" className="absolute -bottom-1 -right-1 w-4 h-4 bg-koke-400 rounded-full border-2 border-sumi-900"></div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold tracking-tight text-washi">{portfolioData.profile.name}</h1>
+                <h1 className="text-2xl font-black tracking-tight text-washi">{portfolioData.profile.name}</h1>
                 <p className="text-sm text-washi-dim font-mono">@AbhishekBarali</p>
               </div>
             </div>
@@ -333,17 +333,17 @@ export default function App() {
                 <polyline points="2 17 12 22 22 17"></polyline>
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
-              <h2 className="text-xl font-black leading-none tracking-tight text-washi">STACK</h2>
+              <h2 className="text-2xl font-black leading-none tracking-tight text-washi">STACK</h2>
             </div>
             <ArrowUpRight className="w-4 h-4 text-washi-dim group-hover:text-washi transition-colors" />
           </div>
           <div className="flex flex-wrap gap-1.5 mt-3 relative z-10">
             {['React', 'Next.js', 'Python', 'AWS', 'Docker'].map(item => (
-              <div key={item} className="px-2 py-0.5 text-[11px] font-medium bg-washi/5 border border-washi/10 rounded-md text-washi/75">
+              <div key={item} className="px-2 py-0.5 text-xs font-medium bg-washi/5 border border-washi/10 rounded-md text-washi/75">
                 {item}
               </div>
             ))}
-            <div className="px-2 py-0.5 text-[11px] font-medium bg-shu-500/10 border border-shu-500/25 rounded-md text-shu-300">+ more</div>
+            <div className="px-2 py-0.5 text-xs font-medium bg-shu-500/10 border border-shu-500/25 rounded-md text-shu-300">+ more</div>
           </div>
         </DraggableBox>
 
@@ -355,7 +355,7 @@ export default function App() {
           className="md:col-span-1 md:row-span-1 flex flex-col gap-2 z-10 hover:z-50"
         >
           <div className="flex items-center justify-center h-1/2 gap-2">
-            <div className="flex items-center justify-center w-1/2 h-full font-black text-2xl leading-none tracking-tighter text-washi bg-sumi-900/95 rounded-2xl border border-washi/10">
+            <div className="flex items-center justify-center w-1/2 h-full font-black text-2xl leading-none tracking-tight text-washi bg-sumi-900/95 rounded-2xl border border-washi/10">
               LIN<br/>KS.
             </div>
             <a href="https://github.com/AbhishekBarali" title="GitHub" target="_blank" rel="noreferrer" draggable={false} className="w-1/2 h-full bg-sumi-900/95 rounded-2xl border border-washi/10 flex items-center justify-center hover:bg-sumi-850 hover:border-shu-500/50 transition-colors cursor-pointer shadow-lg group">
@@ -406,8 +406,8 @@ export default function App() {
           
           <div className="relative z-10 flex justify-between items-end">
             <div className="flex gap-2">
-              <span className="px-3 py-1 bg-shu-500/15 border border-shu-500/30 rounded-full text-sm font-bold text-shu-300">5 Shipped</span>
-              <span className="px-3 py-1 bg-washi/8 border border-washi/10 rounded-full text-sm font-bold text-washi/85">AI Agents</span>
+              <span className="px-3 py-1.5 bg-shu-500/15 border border-shu-500/30 rounded-full eyebrow text-shu-300">5 Shipped</span>
+              <span className="px-3 py-1.5 bg-washi/8 border border-washi/10 rounded-full eyebrow text-washi/85">AI Agents</span>
             </div>
             <p className="font-jp text-4xl font-bold leading-tight text-kin-400/45 select-none" aria-hidden="true">工<br/>芸</p>
           </div>
@@ -430,7 +430,7 @@ export default function App() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-black leading-none text-washi tracking-tight">KAIKI</h3>
-                  <p className="text-[10px] font-bold text-washi-faint tracking-widest uppercase mt-1">FOUNDER & CEO</p>
+                  <p className="eyebrow text-washi-faint mt-1.5">FOUNDER & CEO</p>
                 </div>
               </div>
               <div className="w-8 h-8 rounded-full bg-washi/5 flex items-center justify-center group-hover:bg-shu-500 transition-colors">
@@ -441,7 +441,7 @@ export default function App() {
               <p className="text-xs text-washi/85 font-medium">B2B Security & AI</p>
               <div className="flex items-center gap-2 mt-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-koke-400"></div>
-                <p className="text-[10px] text-washi-dim uppercase tracking-widest">Building Phase</p>
+                <p className="eyebrow text-washi-dim">Building Phase</p>
               </div>
             </div>
           </div>
@@ -474,15 +474,15 @@ export default function App() {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               <div className="bg-shu-500/12 border border-shu-500/30 rounded-xl p-2 md:p-3 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-shu-400"></div>
-                <span className="text-[11px] sm:text-xs font-semibold text-shu-300 uppercase tracking-wider">Context Gen</span>
+                <span className="eyebrow text-shu-300">Context Gen</span>
               </div>
               <div className="bg-washi/5 border border-washi/10 rounded-xl p-2 md:p-3 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-washi/40"></div>
-                <span className="text-[11px] sm:text-xs font-semibold text-washi/80 uppercase tracking-wider">Agent Loops</span>
+                <span className="eyebrow text-washi/80">Agent Loops</span>
               </div>
               <div className="bg-washi/5 border border-washi/10 rounded-xl p-2 md:p-3 hidden sm:flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-washi/40"></div>
-                <span className="text-[11px] sm:text-xs font-semibold text-washi/80 uppercase tracking-wider">MCP Flow</span>
+                <span className="eyebrow text-washi/80">MCP Flow</span>
               </div>
             </div>
             <p className="font-serif italic text-sm text-washi-dim truncate mt-1">“{portfolioData.aiWorkflow.philosophy}”</p>
@@ -514,7 +514,7 @@ export default function App() {
             </div>
           </div>
           <div className="relative z-10 mt-auto pb-1">
-            <p className="text-sm font-semibold text-washi/85">Music Prod, Anime, Manga & Manhwa</p>
+            <p className="text-sm font-medium text-washi/85">Music Prod, Anime, Manga & Manhwa</p>
           </div>
         </DraggableBox>
 
@@ -546,7 +546,7 @@ export default function App() {
             <RobotAvatar size={96} />
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-washi">{portfolioData.profile.name}</h3>
+            <h3 className="text-2xl font-black tracking-tight text-washi">{portfolioData.profile.name}</h3>
             <p className="text-shu-400 font-medium mb-4">{portfolioData.profile.title}</p>
             <p className="text-lg leading-relaxed text-washi/90">{portfolioData.profile.bio}</p>
             
@@ -577,13 +577,13 @@ export default function App() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-auto border-t border-washi/8 pt-6">
               <div>
-                <h4 className="text-[10px] font-black tracking-widest text-washi-faint uppercase mb-4">Frontend</h4>
+                <h4 className="eyebrow text-washi-faint mb-4">Frontend</h4>
                 <div className="flex flex-wrap gap-2">
                   {portfolioData.skills.Frontend.map(s => <span key={s} className="px-3 py-1.5 bg-washi/5 border border-washi/8 rounded-lg text-xs font-medium text-washi/85">{s}</span>)}
                 </div>
               </div>
               <div>
-                <h4 className="text-[10px] font-black tracking-widest text-washi-faint uppercase mb-4">Backend</h4>
+                <h4 className="eyebrow text-washi-faint mb-4">Backend</h4>
                 <div className="flex flex-wrap gap-2">
                   {portfolioData.skills.Backend.map(s => <span key={s} className="px-3 py-1.5 bg-washi/5 border border-washi/8 rounded-lg text-xs font-medium text-washi/85">{s}</span>)}
                 </div>
@@ -608,7 +608,7 @@ export default function App() {
             </div>
             
             <div className="mt-auto relative z-10 border-t border-shu-500/15 pt-6">
-              <h4 className="text-[10px] font-black tracking-widest text-shu-400/70 uppercase mb-4">AI & ML</h4>
+              <h4 className="eyebrow text-shu-400/70 mb-4">AI & ML</h4>
               <div className="flex flex-wrap gap-2">
                 {portfolioData.skills.AI.map(s => <span key={s} className="px-3 py-1.5 bg-shu-500/12 border border-shu-500/20 rounded-lg text-xs font-medium text-shu-300">{s}</span>)}
               </div>
@@ -677,12 +677,12 @@ export default function App() {
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-washi tracking-tight">
                   {portfolioData.company.name}
                 </h3>
-                <p className="text-kin-400 font-bold text-[10px] sm:text-xs tracking-widest mt-1 uppercase">
+                <p className="eyebrow text-kin-400 mt-1.5">
                   {portfolioData.company.status}
                 </p>
               </div></div>
-            <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="hidden sm:flex items-center gap-2 px-4 py-2 bg-washi/5 hover:bg-shu-500 rounded-full text-xs font-bold tracking-tight text-washi/90 hover:text-washi transition-all border border-washi/10 hover:border-shu-500 shrink-0 mt-3 md:mt-2">
-              VISIT SITE <ExternalLink className="w-4 h-4" />
+            <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="hidden sm:flex items-center gap-2 px-4 py-2 bg-washi/5 hover:bg-shu-500 rounded-full text-xs font-bold tracking-wider uppercase text-washi/90 hover:text-washi transition-colors border border-washi/10 hover:border-shu-500 shrink-0 mt-3 md:mt-2">
+              Visit Site <ExternalLink className="w-4 h-4" />
             </a>
           </div>
           
@@ -693,7 +693,7 @@ export default function App() {
                  <div className="w-8 h-8 rounded-lg bg-kin-400/10 border border-kin-400/25 flex items-center justify-center text-kin-400">
                    <Building2 className="w-4 h-4" />
                  </div>
-                 <h4 className="font-bold text-washi text-base">Mission</h4>
+                 <h4 className="text-base font-bold tracking-tight text-washi">Mission</h4>
                </div>
                <p className="text-washi/75 leading-relaxed text-sm">
                  Targeting B2B SaaS with AI-native products that solve deep workflow problems. Developing enterprise-grade tools with unparalleled developer experience.
@@ -706,11 +706,11 @@ export default function App() {
                  <div className="w-8 h-8 rounded-lg bg-koke-400/10 border border-koke-400/25 flex items-center justify-center text-koke-400">
                    <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                  </div>
-                 <h4 className="font-bold text-washi text-base">Current Build</h4>
+                 <h4 className="text-base font-bold tracking-tight text-washi">Current Build</h4>
                </div>
                <div className="flex items-center gap-2 mb-2">
                  <div className="w-2 h-2 rounded-full bg-koke-400 animate-pulse"></div>
-                 <span className="text-[10px] font-bold text-koke-400 uppercase tracking-widest">Private Beta</span>
+                 <span className="eyebrow text-koke-400">Private Beta</span>
                </div>
                <p className="text-washi/75 leading-relaxed text-sm">
                  AI-powered code security scanner currently establishing early stage B2B validation frameworks.
@@ -719,7 +719,7 @@ export default function App() {
           </div>
 
           <div>
-            <h4 className="font-black text-washi mb-4 text-base flex items-center gap-2">
+            <h4 className="text-xl font-bold tracking-tight text-washi mb-4">
               Accelerators & Incubators
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -727,14 +727,14 @@ export default function App() {
                 <div key={prog} className="flex flex-col justify-center text-washi/90 bg-washi/[0.03] px-4 py-3 rounded-xl border border-washi/10 hover:bg-washi/[0.06] hover:border-shu-500/40 transition-all cursor-default relative overflow-hidden group">
                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-shu-500/40 group-hover:bg-shu-500 transition-colors"></div>
                    <span className="text-sm font-bold tracking-tight">{prog}</span>
-                   <span className="text-[10px] font-mono text-washi-faint uppercase tracking-wider mt-0.5">Member</span>
+                   <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-washi-faint mt-0.5">Member</span>
                 </div>
               ))}
             </div>
           </div>
           
           <div className="sm:hidden pt-4 border-t border-washi/10">
-             <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-washi/5 border border-washi/10 rounded-xl text-sm font-bold text-washi">
+             <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-washi/5 border border-washi/10 rounded-xl text-xs font-bold tracking-wider uppercase text-washi">
                 Visit Website <ExternalLink className="w-4 h-4" />
              </a>
           </div>
@@ -790,7 +790,7 @@ export default function App() {
                           <div>
                             <div className="flex items-center gap-3 mb-4">
                                <div className="w-1.5 h-1.5 rounded-full bg-shu-400"></div>
-                               <p className="text-[10px] sm:text-xs font-bold text-washi-dim tracking-[0.2em] uppercase">SHIPPED</p>
+                               <p className="eyebrow text-washi-dim">SHIPPED</p>
                             </div>
                             <p className="text-lg md:text-xl text-washi/85 leading-relaxed font-medium">
                               {project.desc}
@@ -803,7 +803,7 @@ export default function App() {
                               target="_blank" 
                               rel="noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-sumi-950 border border-washi/10 hover:border-shu-500 hover:bg-shu-500 transition-all text-sm font-bold tracking-tight text-washi group/btn"
+                              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-sumi-950 border border-washi/10 hover:border-shu-500 hover:bg-shu-500 transition-colors text-xs font-bold tracking-wider uppercase text-washi group/btn"
                             >
                               Visit Live 
                               <ArrowUpRight className="w-4 h-4 text-washi/60 group-hover/btn:text-washi transition-colors" strokeWidth={2.5} />
@@ -864,7 +864,7 @@ export default function App() {
             </div>
 
             <div className="bg-sumi-950/60 p-6 rounded-3xl border border-washi/10 relative overflow-hidden">
-              <h4 className="text-sm tracking-widest uppercase font-bold text-washi-dim mb-4 flex items-center gap-2">
+              <h4 className="text-xs tracking-[0.18em] uppercase font-bold text-washi-dim mb-4 flex items-center gap-2">
                 <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                   <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
@@ -876,7 +876,7 @@ export default function App() {
                 {portfolioData.aiWorkflow.cloudModels.map(m => (
                   <div key={m} className="flex items-center gap-2 px-3 py-1.5 bg-washi/5 border border-washi/10 rounded-lg">
                     <div className="w-1.5 h-1.5 rounded-full bg-koke-400"></div>
-                    <span className="text-xs font-semibold text-washi/90">{m}</span>
+                    <span className="text-xs font-medium text-washi/90">{m}</span>
                   </div>
                 ))}
               </div>
@@ -887,7 +887,7 @@ export default function App() {
           <div className="md:col-span-7 space-y-6">
             <div className="bg-sumi-950/60 p-6 rounded-3xl border border-washi/10">
               <div className="flex items-center justify-between mb-6">
-                <h4 className="text-xs tracking-widest uppercase font-bold text-washi-dim flex items-center gap-2">
+                <h4 className="text-xs tracking-[0.18em] uppercase font-bold text-washi-dim flex items-center gap-2">
                   <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
                     <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
@@ -896,19 +896,19 @@ export default function App() {
                   </svg>
                   Core MCP Servers
                 </h4>
-                <div className="px-3 py-1 bg-shu-500/15 border border-shu-500/25 rounded-full text-[10px] font-bold text-shu-300 tracking-wider">TOOL AUGMENTATION</div>
+                <div className="px-3 py-1 bg-shu-500/15 border border-shu-500/25 rounded-full eyebrow text-shu-300">TOOL AUGMENTATION</div>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-2 gap-3">
                 {portfolioData.aiWorkflow.mcpTools.map(t => (
                   <div key={t.name} className="group bg-washi/5 hover:bg-washi/10 transition-colors p-4 md:p-5 rounded-2xl border border-washi/8 border-l-[3px] border-l-transparent hover:border-l-shu-500 flex items-center justify-center">
-                    <h5 className="font-extrabold text-washi text-lg tracking-tight text-center">{t.name}</h5>
+                    <h5 className="text-base font-bold tracking-tight text-washi text-center">{t.name}</h5>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="bg-sumi-950/60 p-6 rounded-3xl border border-washi/10">
-              <h4 className="text-xs tracking-widest uppercase font-bold text-washi-dim mb-5 flex items-center gap-2">
+              <h4 className="text-xs tracking-[0.18em] uppercase font-bold text-washi-dim mb-5 flex items-center gap-2">
                 <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
                   <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                   <polyline points="2 17 12 22 22 17"></polyline>
@@ -920,7 +920,7 @@ export default function App() {
                 {portfolioData.aiWorkflow.contextEngineering.map(item => (
                   <div key={item} className="flex items-center gap-3 bg-washi/5 p-3 rounded-xl border border-washi/8">
                     <div className="w-1.5 h-1.5 shrink-0 rounded-full bg-shu-400"></div>
-                    <span className="text-xs sm:text-sm font-medium text-washi/90 leading-relaxed">{item}</span>
+                    <span className="text-sm font-medium text-washi/90 leading-relaxed">{item}</span>
                   </div>
                 ))}
               </div>
@@ -937,7 +937,7 @@ export default function App() {
           {/* Music Panel */}
           <div className="space-y-6">
             <div className="border-b border-washi/10 pb-4">
-               <h4 className="text-xl font-bold tracking-tight text-washi mb-2 uppercase">Music Production</h4>
+               <h4 className="text-xl font-bold tracking-tight text-washi mb-2">Music Production</h4>
                <p className="text-washi-dim text-sm leading-relaxed">{portfolioData.hobbies.music.details}</p>
             </div>
             
@@ -963,7 +963,7 @@ export default function App() {
           {/* Reading & Culture Panel */}
           <div className="space-y-6">
             <div className="border-b border-washi/10 pb-4">
-               <h4 className="text-xl font-bold tracking-tight text-washi mb-2 uppercase">Anime & Manga</h4>
+               <h4 className="text-xl font-bold tracking-tight text-washi mb-2">Anime & Manga</h4>
                <p className="text-washi-dim text-sm leading-relaxed">{portfolioData.hobbies.reading.details}</p>
             </div>
             

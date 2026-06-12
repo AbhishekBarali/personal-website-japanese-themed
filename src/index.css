@@ -39,6 +39,26 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/*
+  Type system — one voice per role:
+  - Display:        font-black tracking-tight (PROJECTS hero, card titles, modal titles)
+  - Section head:   text-xl font-bold tracking-tight (inside modals)
+  - Sub-card head:  text-base font-bold tracking-tight
+  - Body:           text-sm leading-relaxed
+  - Chip:           text-xs font-medium
+  - CTA:            text-xs font-bold tracking-wider uppercase
+  - Eyebrow:        the utility below (tiny caps labels)
+  - Mono:           handles, numbers, footer meta
+  - Serif italic:   pull-quotes & the signature accent only
+*/
+@utility eyebrow {
+  font-size: 0.625rem;
+  line-height: 1.4;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
 html {
   background-color: #131110;
 }
