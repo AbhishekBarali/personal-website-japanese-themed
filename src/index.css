@@ -1,8 +1,36 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-jp: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+
+  /* 墨 sumi — warm ink neutrals, never blue-black */
+  --color-sumi-950: #131110;
+  --color-sumi-900: #1a1715;
+  --color-sumi-850: #201c19;
+  --color-sumi-800: #282320;
+  --color-sumi-700: #3a332e;
+
+  /* 和紙 washi — warm paper whites */
+  --color-washi: #f0eade;
+  --color-washi-dim: #b8b0a2;
+  --color-washi-faint: #847d70;
+
+  /* 朱 shu — hanko vermilion, the single accent */
+  --color-shu-300: #f2977d;
+  --color-shu-400: #ec6f4c;
+  --color-shu-500: #e1532e;
+  --color-shu-600: #c2401f;
+
+  /* 金 kin — muted gold, whisper-level secondary */
+  --color-kin-400: #d9b35c;
+  --color-kin-500: #c8a24b;
+
+  /* 苔 koke — moss green for live/status */
+  --color-koke-400: #a4c47e;
+  --color-koke-500: #87a861;
 }
 
 :root {
@@ -11,9 +39,25 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+html {
+  background-color: #131110;
+}
+
 body {
-  background-color: #08070e;
-  color: #ffffff;
+  background-color: #131110;
+  color: #f0eade;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: #e1532e;
+  color: #f0eade;
+}
+
+:focus-visible {
+  outline: 2px solid #e1532e;
+  outline-offset: 2px;
 }
 
 /* Accessibility: disable animations for users who prefer reduced motion */
@@ -44,77 +88,24 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(240, 234, 222, 0.12);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(240, 234, 222, 0.22);
 }
 
-/* Optimize Mobile Performance — GPU-intensive effects disabled on phones */
+/* Vertical Japanese gutter text */
+.writing-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 0.5em;
+}
+
+/* Mobile: keep shadows cheap */
 @media (max-width: 767px) {
-  /* Disable hardware-intensive backdrop blur on phones */
-  .backdrop-blur-xl, 
-  .backdrop-blur-2xl, 
-  .backdrop-blur-lg, 
-  .backdrop-blur-md, 
-  .backdrop-blur-sm, 
-  .backdrop-blur {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-  
-  /* Prevent highly transparent boxes from blending into black without blur */
-  .bg-\[\#050505\]\/60 {
-    background-color: #0c0c0c !important;
-  }
-  .bg-\[\#0a0e14\]\/80 {
-    background-color: #0a0e14 !important;
-  }
-  .bg-\[\#0a0a0a\]\/90 {
-    background-color: #0a0a0a !important;
-  }
-
-  /* Force modal sticky headers to be fully opaque without blur */
-  .sticky {
-    background-color: #0a0a0a !important;
-  }
-
-  /* Kill mix-blend-mode — forces expensive compositing layers */
-  .mix-blend-screen,
-  .mix-blend-overlay {
-    mix-blend-mode: normal !important;
-  }
-
-  /* Disable all CSS spin animations — constant repaints on mobile */
-  [class*="animate-[spin"] {
-    animation: none !important;
-  }
-
-  /* Reduce pulse animations to static */
-  .animate-pulse {
-    animation: none !important;
-    opacity: 1 !important;
-  }
-
-  /* Disable large blur effects that cause heavy GPU compositing */
-  .blur-\[100px\],
-  .blur-\[150px\],
-  .blur-\[60px\],
-  .blur-\[50px\],
-  .blur-\[40px\] {
-    filter: none !important;
-    display: none !important;
-  }
-
-  /* Reduce shadow complexity */
   .shadow-2xl {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
-  }
-
-  /* Disable hover lift effect (irrelevant on touch) */
-  .hover\:-translate-y-0\.5:hover {
-    transform: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
   }
 }
 
