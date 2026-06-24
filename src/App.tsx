@@ -98,7 +98,6 @@ const Modal = ({ isOpen, onClose, title, jp, children, maxWidth = "max-w-2xl" }:
           <div className="flex justify-between items-center shrink-0 bg-sumi-900 py-4 px-6 md:px-8 border-b border-washi/8">
             <div className="flex items-baseline gap-3">
               <h2 className="text-2xl md:text-3xl font-black tracking-tight text-washi">{title}</h2>
-              {jp && <span className="font-jp text-sm text-shu-400/80 tracking-[0.35em] hidden sm:inline">{jp}</span>}
             </div>
             <button onClick={onClose} aria-label="Close" className="p-2 bg-washi/5 hover:bg-washi/15 rounded-full transition-colors">
               <X className="w-5 h-5 text-washi/80" />
@@ -216,7 +215,6 @@ export default function App() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
   const [resetSignal, setResetSignal] = useState(0);
   const constraintsRef = useRef<HTMLDivElement>(null);
-  const year = new Date().getFullYear();
 
   // Zoom or resize reflows the grid — glide every card back home so
   // stale drag offsets never leave the layout in a mess.
@@ -261,7 +259,7 @@ export default function App() {
         transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
         className="relative z-10 mb-5 w-full max-w-5xl flex items-end justify-between border-b border-washi/10 pb-3"
       >
-        <span className="font-mono text-[11px] tracking-[0.25em] text-washi-dim uppercase">Portfolio — {year}</span>
+        <span className="font-mono text-[11px] tracking-[0.25em] text-washi-dim uppercase">Portfolio</span>
         <span className="font-jp text-xs text-washi-dim tracking-[0.4em] pl-4">職人気質</span>
       </motion.div>
 
@@ -310,9 +308,6 @@ export default function App() {
             <div>
               <p className="text-lg md:text-xl font-medium leading-snug text-washi">
                 Building what people <span className="font-serif italic text-shu-400 text-xl md:text-2xl whitespace-nowrap">actually use.</span>
-              </p>
-              <p className="text-sm text-washi-dim mt-2 max-w-md leading-relaxed line-clamp-2 md:truncate">
-                {portfolioData.profile.bio}
               </p>
             </div>
           </div>
@@ -409,7 +404,6 @@ export default function App() {
               <span className="px-3 py-1.5 bg-shu-500/15 border border-shu-500/30 rounded-full eyebrow text-shu-300">5 Shipped</span>
               <span className="px-3 py-1.5 bg-washi/8 border border-washi/10 rounded-full eyebrow text-washi/85">AI Agents</span>
             </div>
-            <p className="font-jp text-4xl font-bold leading-tight text-kin-400/45 select-none" aria-hidden="true">工<br/>芸</p>
           </div>
         </DraggableBox>
 
@@ -424,10 +418,6 @@ export default function App() {
           <div className="relative z-10 h-full flex flex-col justify-between">
             <div className="flex justify-between items-start">
               <div className="flex items-start gap-3">
-                {/* Hanko seal — 開, the kai of KAIKI */}
-                <div className="w-9 h-9 shrink-0 rounded-lg bg-shu-500 flex items-center justify-center shadow-[0_2px_14px_rgba(225,83,46,0.35)] group-hover:scale-105 transition-transform">
-                  <span className="font-jp font-bold text-washi text-lg leading-none">開</span>
-                </div>
                 <div>
                   <h3 className="text-2xl font-black leading-none text-washi tracking-tight">KAIKI</h3>
                   <p className="eyebrow text-washi-faint mt-1.5">FOUNDER & CEO</p>
@@ -485,7 +475,6 @@ export default function App() {
                 <span className="eyebrow text-washi/80">MCP Flow</span>
               </div>
             </div>
-            <p className="font-serif italic text-sm text-washi-dim truncate mt-1">“{portfolioData.aiWorkflow.philosophy}”</p>
           </div>
         </DraggableBox>
 
@@ -525,10 +514,9 @@ export default function App() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9, duration: 0.8, ease: EASE_OUT_QUART }}
-        className="relative z-10 mt-5 w-full max-w-5xl flex items-center justify-between border-t border-washi/10 pt-3 font-mono text-[11px] text-washi-dim"
+        className="relative z-10 mt-5 w-full max-w-5xl hidden md:flex items-center justify-between border-t border-washi/10 pt-3 font-mono text-[11px] text-washi-dim"
       >
-        <span>© {year} Abhishek Barali</span>
-        <span className="hidden md:flex"><FooterQuip /></span>
+        <span className="flex"><FooterQuip /></span>
         <button
           onClick={() => setResetSignal(s => s + 1)}
           title="put every card back where it belongs"
@@ -562,7 +550,7 @@ export default function App() {
         </div>
       </Modal>
 
-      <Modal isOpen={activeModal === 'stack'} onClose={() => setActiveModal(null)} title="Tech Stack" jp="技術" maxWidth="max-w-5xl">
+      <Modal isOpen={activeModal === 'stack'} onClose={() => setActiveModal(null)} title="Tech Stack" jp="技術" maxWidth="max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           
           {/* Engineering Core (Frontend & Backend) */}

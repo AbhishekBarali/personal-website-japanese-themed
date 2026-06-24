@@ -33,11 +33,6 @@ export default function InteractiveBackground() {
           }}
         />
 
-        {/* Giant kanji watermark — 匠 "master artisan", the theme of the whole page */}
-        <div className="absolute -right-[4vw] top-1/2 -translate-y-1/2 font-jp font-bold leading-none text-[#f0eade]/[0.025] text-[58vh] hidden md:block">
-          匠
-        </div>
-
         {/* Paper grain — static SVG noise, low opacity, no blend mode */}
         <div
           className="absolute inset-0 opacity-[0.13]"
