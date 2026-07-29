@@ -22,10 +22,10 @@ const portfolioData = {
   },
   projects: [
     { name: "Kaiki.dev", desc: "Enterprise-grade B2B Security & AI discovery platform.", link: "https://kaiki.dev", image: "/projects/kaiki.webp", layout: "horizontal" },
+    { name: "SpeakoFlow", desc: "Local-first desktop voice assistant — dictation, writing & AI, all on-device.", link: "https://www.speakoflow.com", image: "/projects/speakoflow.webp", layout: "horizontal" },
+    { name: "Gamedev Agent Skills", desc: "66 open-source Agent Skills that teach AI coding agents to build games in 10 engines.", link: "https://github.com/gamedev-skills/awesome-gamedev-agent-skills", image: "/projects/gamedev-skills.webp", layout: "horizontal" },
     { name: "Barali Chat", desc: "Full-stack AI chat platform with multi-provider support.", link: "https://barali.tech", image: "/projects/barali-chat.webp", layout: "featured" },
-    { name: "Barali Life", desc: "Personal Life OS with dynamic diet engine and gym split.", link: "https://github.com/AbhishekBarali/Barali-Life", image: "/projects/barali-life.webp", layout: "portrait" },
-    { name: "KAIKI Shikigami", desc: "AI agent system for business opportunity discovery.", link: "https://github.com/AbhishekBarali/KAIKI-Shikigami", image: "/projects/shikigami.webp", layout: "horizontal" },
-    { name: "Manhwa Recommender", desc: "AI Recommendation Engine for manhwa.", link: "https://github.com/AbhishekBarali/manhwa-reccomender", image: "/projects/manhwa.webp", layout: "wide" }
+    { name: "KAIKI Shikigami", desc: "AI agent system for business opportunity discovery.", link: "https://github.com/AbhishekBarali/KAIKI-Shikigami", image: "/projects/shikigami.webp", layout: "horizontal" }
   ],
   skills: {
     Frontend: ['React', 'Next.js', 'Vite', 'Tailwind CSS'],
@@ -809,11 +809,14 @@ export default function App() {
                              className="block relative rounded-2xl overflow-hidden border border-washi/10 bg-sumi-950 group/img hover:border-washi/30 transition-all shadow-xl"
                           >
                              <div className={`w-full ${isPortrait ? 'aspect-[9/16]' : 'aspect-[16/9]'} overflow-hidden relative bg-sumi-950`}>
+                               {/* loading="eager": this img only mounts once the row expands, and the
+                                   wrapper animates from height:0 — a lazy image is measured as
+                                   off-screen at that moment and never gets fetched. */}
                                <img 
                                  src={project.image} 
                                  alt={project.name} 
                                  className={`w-full h-full ${isPortrait ? 'object-cover' : 'object-cover object-top'} scale-100 group-hover/img:scale-105 transition-transform duration-[1.5s] ease-[cubic-bezier(0.2,0.8,0.2,1)] opacity-90 group-hover/img:opacity-100`} 
-                                 loading="lazy"
+                                 loading="eager"
                                  decoding="async"
                                />
                              </div>
