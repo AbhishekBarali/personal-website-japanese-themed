@@ -43,8 +43,8 @@ A visually stunning, performance-optimized personal portfolio featuring a Japane
 ## 👤 Author
 
 **Abhishek Barali**
-- Founder of Kaiki
-- CS student at St. Xavier's College
+- CS student at St. Xavier's College, Kathmandu
+- Builds local-first AI tools and open-source models
 
 ---
 *Simplicity is the ultimate sophistication.*
