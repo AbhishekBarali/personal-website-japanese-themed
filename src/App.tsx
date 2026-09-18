@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, animate } from 'motion/react';
-import { Github, Mail, Linkedin, ExternalLink, Building2, ArrowUpRight, X, Code, GraduationCap, Globe, Wrench, Cloud, RotateCcw } from 'lucide-react';
+import { Github, Mail, Linkedin, ExternalLink, ArrowUpRight, X, Code, GraduationCap, Globe, Wrench, Cloud, RotateCcw } from 'lucide-react';
 import InteractiveBackground from './components/InteractiveBackground';
 import PortfolioEyes from './components/PortfolioEyes';
 import { RobotAvatar } from './components/ui/robot-avatar';
@@ -9,22 +9,21 @@ const portfolioData = {
   profile: {
     name: "Abhishek Barali",
     title: "Builder · AI Engineer",
-    bio: "20-year-old CS student building KAIKI — an AI-native B2B company. From code security to chat platforms, I ship products that solve real problems.",
+    bio: "20-year-old CS student in Kathmandu. I build local-first AI tools and ship them: an offline dictation app, a 0.8B cleanup model, open-source agent skills.",
     location: "Kathmandu, Nepal"
   },
-  company: {
-    name: "KAIKI",
-    full: "Kaiki AI Technology Pvt. Ltd.",
-    status: "Registered company · Self-funded",
-    product: "AI-powered code security scanner (Private Beta)",
-    next: "AI-personalized study platform",
-    accelerators: ["NVIDIA Inception", "Alibaba Cloud AI Catalyst"]
+  model: {
+    name: "SpeakoFlow Mini",
+    spec: "0.8B · GGUF · Apache-2.0",
+    desc: "Dictation cleanup model",
+    link: "https://huggingface.co/SpeakoFlow/speakoflow-mini"
   },
   projects: [
-    { name: "Kaiki.dev", desc: "Enterprise-grade B2B Security & AI discovery platform.", link: "https://kaiki.dev", image: "/projects/kaiki.webp", layout: "horizontal" },
-    { name: "SpeakoFlow", desc: "Local-first desktop voice assistant — dictation, writing & AI, all on-device.", link: "https://www.speakoflow.com", image: "/projects/speakoflow.webp", layout: "horizontal" },
+    { name: "SpeakoFlow", desc: "Local-first desktop voice assistant. Dictation, writing and AI, all on-device.", link: "https://www.speakoflow.com", image: "/projects/speakoflow.webp", layout: "horizontal" },
+    { name: "SpeakoFlow Mini", desc: "A 0.8B dictation cleanup model, fine-tuned from Qwen3.5-0.8B. It applies the correction the speaker made and leaves everything else untouched. 833 MB, runs offline. Published with its evaluation spec, an example dataset, and the rule layer as a separate MIT library.", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", image: "/projects/speakoflow-mini.webp", layout: "horizontal" },
     { name: "Gamedev Agent Skills", desc: "66 open-source Agent Skills that teach AI coding agents to build games in 10 engines.", link: "https://github.com/gamedev-skills/awesome-gamedev-agent-skills", image: "/projects/gamedev-skills.webp", layout: "horizontal" },
     { name: "Barali Chat", desc: "Full-stack AI chat platform with multi-provider support.", link: "https://barali.tech", image: "/projects/barali-chat.webp", layout: "featured" },
+    { name: "Kaiki.dev", desc: "B2B security and AI discovery platform. Private beta.", link: "https://kaiki.dev", image: "/projects/kaiki.webp", layout: "horizontal" },
     { name: "KAIKI Shikigami", desc: "AI agent system for business opportunity discovery.", link: "https://github.com/AbhishekBarali/KAIKI-Shikigami", image: "/projects/shikigami.webp", layout: "horizontal" }
   ],
   skills: {
@@ -401,40 +400,45 @@ export default function App() {
           
           <div className="relative z-10 flex justify-between items-end">
             <div className="flex gap-2">
-              <span className="px-3 py-1.5 bg-shu-500/15 border border-shu-500/30 rounded-full eyebrow text-shu-300">5 Shipped</span>
+              <span className="px-3 py-1.5 bg-shu-500/15 border border-shu-500/30 rounded-full eyebrow text-shu-300">6 Shipped</span>
               <span className="px-3 py-1.5 bg-washi/8 border border-washi/10 rounded-full eyebrow text-washi/85">AI Agents</span>
             </div>
           </div>
         </DraggableBox>
 
-        {/* Company Box */}
+        {/* Model Box — the Hugging Face release */}
         <DraggableBox
           variants={itemVariants}
           dragRef={constraintsRef}
           resetSignal={resetSignal}
-          onClick={() => setActiveModal('company')}
-          className="md:col-span-1 md:row-span-1 bg-sumi-900/95 rounded-3xl p-5 border border-washi/10 relative overflow-hidden group cursor-pointer shadow-2xl hover:border-washi/25 hover:bg-sumi-850 transition-colors duration-300 z-10 hover:z-50"
+          className="md:col-span-1 md:row-span-1 bg-sumi-900/95 rounded-3xl p-5 border border-washi/10 relative overflow-hidden group shadow-2xl hover:border-washi/25 hover:bg-sumi-850 transition-colors duration-300 z-10 hover:z-50"
         >
-          <div className="relative z-10 h-full flex flex-col justify-between">
+          <a
+            href={portfolioData.model.link}
+            target="_blank"
+            rel="noreferrer"
+            draggable={false}
+            className="relative z-10 h-full flex flex-col justify-between cursor-pointer"
+          >
             <div className="flex justify-between items-start">
               <div className="flex items-start gap-3">
                 <div>
-                  <h3 className="text-2xl font-black leading-none text-washi tracking-tight">KAIKI</h3>
-                  <p className="eyebrow text-washi-faint mt-1.5">FOUNDER & CEO</p>
+                  <h3 className="text-xl font-black leading-none text-washi tracking-tight">SPEAKOFLOW<br />MINI</h3>
+                  <p className="eyebrow text-washi-faint mt-1.5">{portfolioData.model.spec}</p>
                 </div>
               </div>
-              <div className="w-8 h-8 rounded-full bg-washi/5 flex items-center justify-center group-hover:bg-shu-500 transition-colors">
+              <div className="w-8 h-8 rounded-full bg-washi/5 flex items-center justify-center group-hover:bg-shu-500 transition-colors shrink-0">
                 <ArrowUpRight className="w-4 h-4 text-washi" />
               </div>
             </div>
             <div className="mt-4 bg-sumi-950/70 border border-washi/8 rounded-xl p-3">
-              <p className="text-xs text-washi/85 font-medium">B2B Security & AI</p>
+              <p className="text-xs text-washi/85 font-medium">{portfolioData.model.desc}</p>
               <div className="flex items-center gap-2 mt-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-koke-400"></div>
-                <p className="eyebrow text-washi-dim">Building Phase</p>
+                <p className="eyebrow text-washi-dim">On Hugging Face</p>
               </div>
             </div>
-          </div>
+          </a>
         </DraggableBox>
 
         {/* AI Workflow Box — hero card */}
@@ -651,81 +655,6 @@ export default function App() {
             </div>
           </div>
           
-        </div>
-      </Modal>
-
-      <Modal isOpen={activeModal === 'company'} onClose={() => setActiveModal(null)} title="Company" jp="会社" maxWidth="max-w-2xl">
-        <div className="space-y-8">
-          <div className="flex items-start justify-between border-b border-washi/10 pb-6 group pt-2">
-            <div className="flex items-center gap-4">
-              <div className="w-11 h-11 shrink-0 rounded-lg bg-shu-500 flex items-center justify-center shadow-[0_2px_16px_rgba(225,83,46,0.35)]">
-                <span className="font-jp font-bold text-washi text-xl leading-none">開</span>
-              </div>
-              <div className="flex flex-col justify-center">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-washi tracking-tight">
-                  {portfolioData.company.name}
-                </h3>
-                <p className="eyebrow text-kin-400 mt-1.5">
-                  {portfolioData.company.status}
-                </p>
-              </div></div>
-            <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="hidden sm:flex items-center gap-2 px-4 py-2 bg-washi/5 hover:bg-shu-500 rounded-full text-xs font-bold tracking-wider uppercase text-washi/90 hover:text-washi transition-colors border border-washi/10 hover:border-shu-500 shrink-0 mt-3 md:mt-2">
-              Visit Site <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-             {/* Mission */}
-             <div className="bg-sumi-950/60 p-6 rounded-2xl border border-washi/10 relative overflow-hidden group hover:border-kin-400/30 transition-colors duration-300">
-               <div className="flex items-center gap-3 mb-3">
-                 <div className="w-8 h-8 rounded-lg bg-kin-400/10 border border-kin-400/25 flex items-center justify-center text-kin-400">
-                   <Building2 className="w-4 h-4" />
-                 </div>
-                 <h4 className="text-base font-bold tracking-tight text-washi">Mission</h4>
-               </div>
-               <p className="text-washi/75 leading-relaxed text-sm">
-                 Targeting B2B SaaS with AI-native products that solve deep workflow problems. Developing enterprise-grade tools with unparalleled developer experience.
-               </p>
-             </div>
-
-             {/* Initiative */}
-             <div className="bg-sumi-950/60 p-6 rounded-2xl border border-washi/10 relative overflow-hidden group hover:border-koke-400/35 transition-colors duration-300">
-               <div className="flex items-center gap-3 mb-3">
-                 <div className="w-8 h-8 rounded-lg bg-koke-400/10 border border-koke-400/25 flex items-center justify-center text-koke-400">
-                   <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                 </div>
-                 <h4 className="text-base font-bold tracking-tight text-washi">Current Build</h4>
-               </div>
-               <div className="flex items-center gap-2 mb-2">
-                 <div className="w-2 h-2 rounded-full bg-koke-400 animate-pulse"></div>
-                 <span className="eyebrow text-koke-400">Private Beta</span>
-               </div>
-               <p className="text-washi/75 leading-relaxed text-sm">
-                 AI-powered code security scanner currently establishing early stage B2B validation frameworks.
-               </p>
-             </div>
-          </div>
-
-          <div>
-            <h4 className="text-xl font-bold tracking-tight text-washi mb-4">
-              Accelerators & Incubators
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {portfolioData.company.accelerators.map(prog => (
-                <div key={prog} className="flex flex-col justify-center text-washi/90 bg-washi/[0.03] px-4 py-3 rounded-xl border border-washi/10 hover:bg-washi/[0.06] hover:border-shu-500/40 transition-all cursor-default relative overflow-hidden group">
-                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-shu-500/40 group-hover:bg-shu-500 transition-colors"></div>
-                   <span className="text-sm font-bold tracking-tight">{prog}</span>
-                   <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-washi-faint mt-0.5">Member</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className="sm:hidden pt-4 border-t border-washi/10">
-             <a href="https://kaiki.dev" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-washi/5 border border-washi/10 rounded-xl text-xs font-bold tracking-wider uppercase text-washi">
-                Visit Website <ExternalLink className="w-4 h-4" />
-             </a>
-          </div>
         </div>
       </Modal>
 
