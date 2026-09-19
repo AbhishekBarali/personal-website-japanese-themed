@@ -25,8 +25,7 @@ const portfolioData = {
     { name: "SpeakoFlow", repo: "AbhishekBarali/SpeakoFlow", stars: 246, license: "GPL-3.0", desc: "Offline voice dictation for Windows, macOS and Linux. Rust and Tauri." },
     { name: "SpeakoFlow Mini", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", host: "Hugging Face", license: "Apache-2.0", desc: "A 0.8B dictation cleanup model in GGUF, published with its evaluation spec." },
     { name: "dictation-cleanup-rules", repo: "AbhishekBarali/dictation-cleanup-rules", license: "MIT", desc: "The deterministic half of cleanup as a library. Spec, pattern tables, conformance suite, Python and TypeScript." },
-    { name: "dictation-cleanup-dataset", repo: "AbhishekBarali/dictation-cleanup-dataset", license: "CC BY 4.0", desc: "3,337 hand-authored cleanup pairs. 46% are rows a model must return unchanged." },
-    { name: "awesome-voice-typing", repo: "AbhishekBarali/awesome-voice-typing", license: "CC0", desc: "Curated index of open-source speech-to-text and voice typing tools across five platforms." }
+    { name: "dictation-cleanup-dataset", repo: "AbhishekBarali/dictation-cleanup-dataset", license: "CC BY 4.0", desc: "3,337 hand-authored cleanup pairs. 46% are rows a model must return unchanged." }
   ],
   projects: [
     { name: "SpeakoFlow", desc: "Local-first desktop voice assistant. Dictation, writing and AI, all on-device.", link: "https://www.speakoflow.com", image: "/projects/speakoflow.webp", layout: "horizontal" },
