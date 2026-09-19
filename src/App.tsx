@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, animate } from 'motion/react';
-import { Github, Mail, Linkedin, ExternalLink, ArrowUpRight, X, Code, GraduationCap, Globe, Wrench, Cloud, RotateCcw } from 'lucide-react';
+import { Github, Mail, Linkedin, ExternalLink, Star, ArrowUpRight, X, Code, GraduationCap, Globe, Wrench, Cloud, RotateCcw } from 'lucide-react';
 import InteractiveBackground from './components/InteractiveBackground';
 import PortfolioEyes from './components/PortfolioEyes';
 import { RobotAvatar } from './components/ui/robot-avatar';
@@ -18,6 +18,16 @@ const portfolioData = {
     desc: "Dictation cleanup model",
     link: "https://huggingface.co/SpeakoFlow/speakoflow-mini"
   },
+  // Star counts are a floor: they render instantly, then get refreshed
+  // live from the GitHub API on mount so the card never goes stale.
+  openSource: [
+    { name: "Gamedev Agent Skills", repo: "gamedev-skills/awesome-gamedev-agent-skills", stars: 1055, license: "MIT", desc: "66 Agent Skills that teach AI coding agents to build games in 10 engines." },
+    { name: "SpeakoFlow", repo: "AbhishekBarali/SpeakoFlow", stars: 246, license: "GPL-3.0", desc: "Offline voice dictation for Windows, macOS and Linux. Rust and Tauri." },
+    { name: "SpeakoFlow Mini", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", host: "Hugging Face", license: "Apache-2.0", desc: "A 0.8B dictation cleanup model in GGUF, published with its evaluation spec." },
+    { name: "dictation-cleanup-rules", repo: "AbhishekBarali/dictation-cleanup-rules", license: "MIT", desc: "The deterministic half of cleanup as a library. Spec, pattern tables, conformance suite, Python and TypeScript." },
+    { name: "dictation-cleanup-dataset", repo: "AbhishekBarali/dictation-cleanup-dataset", license: "CC BY 4.0", desc: "3,337 hand-authored cleanup pairs. 46% are rows a model must return unchanged." },
+    { name: "awesome-voice-typing", repo: "AbhishekBarali/awesome-voice-typing", license: "CC0", desc: "Curated index of open-source speech-to-text and voice typing tools across five platforms." }
+  ],
   projects: [
     { name: "SpeakoFlow", desc: "Local-first desktop voice assistant. Dictation, writing and AI, all on-device.", link: "https://www.speakoflow.com", image: "/projects/speakoflow.webp", layout: "horizontal" },
     { name: "SpeakoFlow Mini", desc: "A 0.8B dictation cleanup model, fine-tuned from Qwen3.5-0.8B. It applies the correction the speaker made and leaves everything else untouched. 833 MB, runs offline. Published with its evaluation spec, an example dataset, and the rule layer as a separate MIT library.", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", image: "/projects/speakoflow-mini.webp", layout: "horizontal" },
@@ -213,7 +223,41 @@ export default function App() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
   const [resetSignal, setResetSignal] = useState(0);
+  const [stars, setStars] = useState<Record<string, number>>(
+    () => Object.fromEntries(
+      portfolioData.openSource.filter(r => r.repo && r.stars).map(r => [r.repo as string, r.stars as number])
+    )
+  );
   const constraintsRef = useRef<HTMLDivElement>(null);
+
+  const totalStars = portfolioData.openSource.reduce(
+    (sum, r) => sum + (r.repo ? (stars[r.repo] ?? 0) : 0), 0
+  );
+  const starLabel = totalStars >= 1000
+    ? `${(totalStars / 1000).toFixed(1)}k`
+    : String(totalStars);
+
+  // Live star counts. Unauthenticated GitHub API, and every failure is
+  // swallowed on purpose: the hardcoded floor stays on screen instead.
+  useEffect(() => {
+    let alive = true;
+    const tracked = portfolioData.openSource.filter(r => r.repo && r.stars);
+    Promise.all(tracked.map(async r => {
+      try {
+        const res = await fetch(`https://api.github.com/repos/${r.repo}`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return typeof json.stargazers_count === 'number'
+          ? [r.repo as string, json.stargazers_count] as const
+          : null;
+      } catch { return null; }
+    })).then(results => {
+      if (!alive) return;
+      const fresh = results.filter(Boolean) as (readonly [string, number])[];
+      if (fresh.length) setStars(prev => ({ ...prev, ...Object.fromEntries(fresh) }));
+    });
+    return () => { alive = false; };
+  }, []);
 
   // Zoom or resize reflows the grid — glide every card back home so
   // stale drag offsets never leave the layout in a mess.
@@ -406,39 +450,36 @@ export default function App() {
           </div>
         </DraggableBox>
 
-        {/* Model Box — the Hugging Face release */}
+        {/* Open Source Box — public work, live star count */}
         <DraggableBox
           variants={itemVariants}
           dragRef={constraintsRef}
           resetSignal={resetSignal}
-          className="md:col-span-1 md:row-span-1 bg-sumi-900/95 rounded-3xl p-5 border border-washi/10 relative overflow-hidden group shadow-2xl hover:border-washi/25 hover:bg-sumi-850 transition-colors duration-300 z-10 hover:z-50"
+          onClick={() => setActiveModal('opensource')}
+          className="md:col-span-1 md:row-span-1 bg-sumi-900/95 rounded-3xl p-5 border border-washi/10 relative overflow-hidden group cursor-pointer shadow-2xl hover:border-washi/25 hover:bg-sumi-850 transition-colors duration-300 z-10 hover:z-50"
         >
-          <a
-            href={portfolioData.model.link}
-            target="_blank"
-            rel="noreferrer"
-            draggable={false}
-            className="relative z-10 h-full flex flex-col justify-between cursor-pointer"
-          >
+          <div className="relative z-10 h-full flex flex-col justify-between">
             <div className="flex justify-between items-start">
-              <div className="flex items-start gap-3">
-                <div>
-                  <h3 className="text-xl font-black leading-none text-washi tracking-tight">SPEAKOFLOW<br />MINI</h3>
-                  <p className="eyebrow text-washi-faint mt-1.5">{portfolioData.model.spec}</p>
-                </div>
+              <div>
+                <h3 className="text-2xl font-black leading-none text-washi tracking-tight">OPEN<br />SOURCE</h3>
+                <p className="eyebrow text-washi-faint mt-1.5">MIT · Apache · GPL</p>
               </div>
               <div className="w-8 h-8 rounded-full bg-washi/5 flex items-center justify-center group-hover:bg-shu-500 transition-colors shrink-0">
                 <ArrowUpRight className="w-4 h-4 text-washi" />
               </div>
             </div>
             <div className="mt-4 bg-sumi-950/70 border border-washi/8 rounded-xl p-3">
-              <p className="text-xs text-washi/85 font-medium">{portfolioData.model.desc}</p>
+              <div className="flex items-baseline gap-2">
+                <Star className="w-3.5 h-3.5 text-kin-400 shrink-0 self-center" fill="currentColor" />
+                <span className="text-lg font-black text-washi leading-none tracking-tight">{starLabel}</span>
+                <span className="text-xs text-washi/70 font-medium">stars</span>
+              </div>
               <div className="flex items-center gap-2 mt-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-koke-400"></div>
-                <p className="eyebrow text-washi-dim">On Hugging Face</p>
+                <p className="eyebrow text-washi-dim">{portfolioData.openSource.length} Public Releases</p>
               </div>
             </div>
-          </a>
+          </div>
         </DraggableBox>
 
         {/* AI Workflow Box — hero card */}
@@ -655,6 +696,66 @@ export default function App() {
             </div>
           </div>
           
+        </div>
+      </Modal>
+
+      {/* Open Source — every public release in one place */}
+      <Modal isOpen={activeModal === 'opensource'} onClose={() => setActiveModal(null)} title="Open Source" jp="公開" maxWidth="max-w-3xl">
+        <div className="space-y-5">
+          <p className="text-washi/70 text-sm leading-relaxed">
+            Everything here is public and checkable: the app, the model it downloads, the rule
+            layer underneath it, the dataset behind the rules, and the skills.
+            Star counts come live from the GitHub API.
+          </p>
+
+          <div className="flex flex-col gap-3">
+            {portfolioData.openSource.map(item => {
+              const href = item.repo ? `https://github.com/${item.repo}` : item.link!;
+              const count = item.repo ? stars[item.repo] : undefined;
+              return (
+                <a
+                  key={item.name}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-sumi-950/60 p-5 rounded-2xl border border-washi/10 hover:border-shu-500/40 hover:bg-washi/[0.04] transition-colors group block"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      <h4 className="text-base font-bold tracking-tight text-washi group-hover:text-shu-300 transition-colors">
+                        {item.name}
+                      </h4>
+                      <p className="text-washi/70 text-sm leading-relaxed mt-1.5">{item.desc}</p>
+                    </div>
+                    <div className="flex flex-col items-end gap-2 shrink-0">
+                      {count ? (
+                        <span className="flex items-center gap-1.5 text-washi/90">
+                          <Star className="w-3.5 h-3.5 text-kin-400" fill="currentColor" />
+                          <span className="text-sm font-bold tabular-nums">{count.toLocaleString()}</span>
+                        </span>
+                      ) : (
+                        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-washi-faint">
+                          {item.host ?? 'GitHub'}
+                        </span>
+                      )}
+                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-washi-faint">
+                        {item.license}
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+
+          <a
+            href="https://github.com/AbhishekBarali"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center gap-2 w-full py-3 bg-washi/5 border border-washi/10 hover:border-shu-500 hover:bg-shu-500 rounded-xl text-xs font-bold tracking-wider uppercase text-washi transition-colors"
+          >
+            All repositories <ExternalLink className="w-4 h-4" />
+          </a>
         </div>
       </Modal>
 
