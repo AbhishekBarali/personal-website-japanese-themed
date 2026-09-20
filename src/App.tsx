@@ -22,7 +22,7 @@ const portfolioData = {
   // live from the GitHub API on mount so the card never goes stale.
   openSource: [
     { name: "Gamedev Agent Skills", repo: "gamedev-skills/awesome-gamedev-agent-skills", stars: 1055, license: "MIT", desc: "66 Agent Skills that teach AI coding agents to build games in 10 engines." },
-    { name: "SpeakoFlow", repo: "AbhishekBarali/SpeakoFlow", stars: 246, license: "GPL-3.0", desc: "Offline voice dictation for Windows, macOS and Linux. Rust and Tauri." },
+    { name: "SpeakoFlow", repo: "AbhishekBarali/SpeakoFlow", stars: 246, license: "MIT", desc: "Offline voice dictation for Windows, macOS and Linux. Rust and Tauri." },
     { name: "SpeakoFlow Mini", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", host: "Hugging Face", license: "Apache-2.0", desc: "A 0.8B dictation cleanup model in GGUF, published with its evaluation spec." },
     { name: "dictation-cleanup-rules", repo: "AbhishekBarali/dictation-cleanup-rules", license: "MIT", desc: "The deterministic half of cleanup as a library. Spec, pattern tables, conformance suite, Python and TypeScript." },
     { name: "dictation-cleanup-dataset", repo: "AbhishekBarali/dictation-cleanup-dataset", license: "CC BY 4.0", desc: "3,337 hand-authored cleanup pairs. 46% are rows a model must return unchanged." }
@@ -461,7 +461,7 @@ export default function App() {
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="text-2xl font-black leading-none text-washi tracking-tight">OPEN<br />SOURCE</h3>
-                <p className="eyebrow text-washi-faint mt-1.5">MIT · Apache · GPL</p>
+                <p className="eyebrow text-washi-faint mt-1.5">MIT · Apache · CC BY</p>
               </div>
               <div className="w-8 h-8 rounded-full bg-washi/5 flex items-center justify-center group-hover:bg-shu-500 transition-colors shrink-0">
                 <ArrowUpRight className="w-4 h-4 text-washi" />
