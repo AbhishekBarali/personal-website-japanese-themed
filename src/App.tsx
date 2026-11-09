@@ -21,10 +21,10 @@ const portfolioData = {
   // Star counts are a floor: they render instantly, then get refreshed
   // live from the GitHub API on mount so the card never goes stale.
   openSource: [
-    { name: "Padding to k (arXiv preprint)", link: "https://arxiv.org/abs/2610.30997", host: "arXiv", license: "CC BY 4.0", desc: "When a JSON schema asks for at least k list items, open-weight models pad their answers to reach k. A preregistered study of 8 models on 558 real documents, with code and data released." },
     { name: "Gamedev Agent Skills", repo: "gamedev-skills/awesome-gamedev-agent-skills", stars: 7964, license: "Apache-2.0", desc: "77 Agent Skills that teach AI coding agents to build games in 12 engines." },
     { name: "SpeakoFlow", repo: "AbhishekBarali/SpeakoFlow", stars: 393, license: "MIT", desc: "Offline voice dictation for Windows, macOS and Linux. Rust and Tauri." },
     { name: "SpeakoFlow Mini", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", host: "Hugging Face", license: "Apache-2.0", desc: "A 0.8B dictation cleanup model in GGUF, published with its evaluation spec." },
+    { name: "Padding to k (research paper)", link: "https://arxiv.org/abs/2610.30997", host: "arXiv", license: "CC BY 4.0", desc: "When a JSON schema asks for at least k list items, open-weight models pad their answers to reach k. A preregistered study of 8 models on 558 real documents, with code and data released." },
     { name: "dictation-cleanup-dataset", repo: "AbhishekBarali/dictation-cleanup-dataset", license: "CC BY 4.0", desc: "3,337 hand-authored cleanup pairs. 46% are rows a model must return unchanged." }
   ],
   projects: [
@@ -717,8 +717,8 @@ export default function App() {
       <Modal isOpen={activeModal === 'opensource'} onClose={() => setActiveModal(null)} title="Open Source" jp="公開" maxWidth="max-w-3xl">
         <div className="space-y-5">
           <p className="text-washi/70 text-sm leading-relaxed">
-            Everything here is public and checkable: the research paper, the app, the model it
-            downloads, the cleanup dataset, and the skills.
+            Everything here is public and checkable: the skills, the app, the model it
+            downloads, the research paper, and the cleanup dataset.
             Star counts come live from the GitHub API.
           </p>
 
