@@ -21,16 +21,16 @@ const portfolioData = {
   // Star counts are a floor: they render instantly, then get refreshed
   // live from the GitHub API on mount so the card never goes stale.
   openSource: [
-    { name: "Gamedev Agent Skills", repo: "gamedev-skills/awesome-gamedev-agent-skills", stars: 7964, license: "MIT", desc: "66 Agent Skills that teach AI coding agents to build games in 10 engines." },
+    { name: "Padding to k (arXiv preprint)", link: "https://arxiv.org/abs/2610.30997", host: "arXiv", license: "CC BY 4.0", desc: "When a JSON schema asks for at least k list items, open-weight models pad their answers to reach k. A preregistered study of 8 models on 558 real documents, with code and data released." },
+    { name: "Gamedev Agent Skills", repo: "gamedev-skills/awesome-gamedev-agent-skills", stars: 7964, license: "Apache-2.0", desc: "77 Agent Skills that teach AI coding agents to build games in 12 engines." },
     { name: "SpeakoFlow", repo: "AbhishekBarali/SpeakoFlow", stars: 393, license: "MIT", desc: "Offline voice dictation for Windows, macOS and Linux. Rust and Tauri." },
     { name: "SpeakoFlow Mini", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", host: "Hugging Face", license: "Apache-2.0", desc: "A 0.8B dictation cleanup model in GGUF, published with its evaluation spec." },
-    { name: "dictation-cleanup-rules", repo: "AbhishekBarali/dictation-cleanup-rules", license: "MIT", desc: "The deterministic half of cleanup as a library. Spec, pattern tables, conformance suite, Python and TypeScript." },
     { name: "dictation-cleanup-dataset", repo: "AbhishekBarali/dictation-cleanup-dataset", license: "CC BY 4.0", desc: "3,337 hand-authored cleanup pairs. 46% are rows a model must return unchanged." }
   ],
   projects: [
     { name: "SpeakoFlow", desc: "Local-first desktop voice assistant. Dictation, writing and AI, all on-device.", link: "https://www.speakoflow.com", image: "/projects/speakoflow.webp", layout: "horizontal" },
     { name: "SpeakoFlow Mini", desc: "A 0.8B dictation cleanup model, fine-tuned from Qwen3.5-0.8B. It applies the correction the speaker made and leaves everything else untouched. 833 MB, runs offline. Published with its evaluation spec, an example dataset, and the rule layer as a separate MIT library.", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", image: "/projects/speakoflow-mini.webp", layout: "horizontal" },
-    { name: "Gamedev Agent Skills", desc: "66 open-source Agent Skills that teach AI coding agents to build games in 10 engines.", link: "https://github.com/gamedev-skills/awesome-gamedev-agent-skills", image: "/projects/gamedev-skills.webp", layout: "horizontal" },
+    { name: "Gamedev Agent Skills", desc: "77 open-source Agent Skills that teach AI coding agents to build games in 12 engines.", link: "https://github.com/gamedev-skills/awesome-gamedev-agent-skills", image: "/projects/gamedev-skills.webp", layout: "horizontal" },
     { name: "Barali Chat", desc: "Full-stack AI chat platform with multi-provider support.", link: "https://barali.tech", image: "/projects/barali-chat.webp", layout: "featured" },
     { name: "Kaiki.dev", desc: "B2B security and AI discovery platform. Private beta.", link: "https://kaiki.dev", image: "/projects/kaiki.webp", layout: "horizontal" },
     { name: "KAIKI Shikigami", desc: "AI agent system for business opportunity discovery.", link: "https://github.com/AbhishekBarali/KAIKI-Shikigami", image: "/projects/shikigami.webp", layout: "horizontal" }
@@ -717,8 +717,8 @@ export default function App() {
       <Modal isOpen={activeModal === 'opensource'} onClose={() => setActiveModal(null)} title="Open Source" jp="公開" maxWidth="max-w-3xl">
         <div className="space-y-5">
           <p className="text-washi/70 text-sm leading-relaxed">
-            Everything here is public and checkable: the app, the model it downloads, the rule
-            layer underneath it, the dataset behind the rules, and the skills.
+            Everything here is public and checkable: the research paper, the app, the model it
+            downloads, the cleanup dataset, and the skills.
             Star counts come live from the GitHub API.
           </p>
 
