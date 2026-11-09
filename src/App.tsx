@@ -21,8 +21,8 @@ const portfolioData = {
   // Star counts are a floor: they render instantly, then get refreshed
   // live from the GitHub API on mount so the card never goes stale.
   openSource: [
-    { name: "Gamedev Agent Skills", repo: "gamedev-skills/awesome-gamedev-agent-skills", stars: 1055, license: "MIT", desc: "66 Agent Skills that teach AI coding agents to build games in 10 engines." },
-    { name: "SpeakoFlow", repo: "AbhishekBarali/SpeakoFlow", stars: 246, license: "MIT", desc: "Offline voice dictation for Windows, macOS and Linux. Rust and Tauri." },
+    { name: "Gamedev Agent Skills", repo: "gamedev-skills/awesome-gamedev-agent-skills", stars: 7964, license: "MIT", desc: "66 Agent Skills that teach AI coding agents to build games in 10 engines." },
+    { name: "SpeakoFlow", repo: "AbhishekBarali/SpeakoFlow", stars: 393, license: "MIT", desc: "Offline voice dictation for Windows, macOS and Linux. Rust and Tauri." },
     { name: "SpeakoFlow Mini", link: "https://huggingface.co/SpeakoFlow/speakoflow-mini", host: "Hugging Face", license: "Apache-2.0", desc: "A 0.8B dictation cleanup model in GGUF, published with its evaluation spec." },
     { name: "dictation-cleanup-rules", repo: "AbhishekBarali/dictation-cleanup-rules", license: "MIT", desc: "The deterministic half of cleanup as a library. Spec, pattern tables, conformance suite, Python and TypeScript." },
     { name: "dictation-cleanup-dataset", repo: "AbhishekBarali/dictation-cleanup-dataset", license: "CC BY 4.0", desc: "3,337 hand-authored cleanup pairs. 46% are rows a model must return unchanged." }
@@ -236,25 +236,40 @@ export default function App() {
     ? `${(totalStars / 1000).toFixed(1)}k`
     : String(totalStars);
 
-  // Live star counts. Unauthenticated GitHub API, and every failure is
-  // swallowed on purpose: the hardcoded floor stays on screen instead.
+  // Live star counts. First from our own cached /api/stars (one GitHub call
+  // an hour for everyone), then straight from the GitHub API for any repo it
+  // missed. That API allows 60 calls an hour per IP, so it can fail on shared
+  // networks; every failure is swallowed and the hardcoded floor stays.
   useEffect(() => {
     let alive = true;
     const tracked = portfolioData.openSource.filter(r => r.repo && r.stars);
-    Promise.all(tracked.map(async r => {
+    const isCount = (v: unknown): v is number => typeof v === 'number' && v >= 0;
+
+    (async () => {
+      const fresh: Record<string, number> = {};
       try {
-        const res = await fetch(`https://api.github.com/repos/${r.repo}`);
-        if (!res.ok) return null;
-        const json = await res.json();
-        return typeof json.stargazers_count === 'number'
-          ? [r.repo as string, json.stargazers_count] as const
-          : null;
-      } catch { return null; }
-    })).then(results => {
-      if (!alive) return;
-      const fresh = results.filter(Boolean) as (readonly [string, number])[];
-      if (fresh.length) setStars(prev => ({ ...prev, ...Object.fromEntries(fresh) }));
-    });
+        const res = await fetch('/api/stars');
+        if (res.ok) {
+          const json = await res.json();
+          for (const r of tracked) {
+            const v = json?.[r.repo as string];
+            if (isCount(v)) fresh[r.repo as string] = v;
+          }
+        }
+      } catch { /* fall through to GitHub */ }
+
+      const missing = tracked.filter(r => fresh[r.repo as string] === undefined);
+      await Promise.all(missing.map(async r => {
+        try {
+          const res = await fetch(`https://api.github.com/repos/${r.repo}`);
+          if (!res.ok) return;
+          const json = await res.json();
+          if (isCount(json.stargazers_count)) fresh[r.repo as string] = json.stargazers_count;
+        } catch { /* keep the floor */ }
+      }));
+
+      if (alive && Object.keys(fresh).length) setStars(prev => ({ ...prev, ...fresh }));
+    })();
     return () => { alive = false; };
   }, []);
 
